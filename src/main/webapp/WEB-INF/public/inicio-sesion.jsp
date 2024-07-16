@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,18 @@
 <title>CheLaburo - Inicio de sesión</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="/css/styles.css" rel="stylesheet">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
 </head>
 <body>
-<main class="flex min-h-screen justify-center bg-orange-950 p-3 md:p-4 dark:bg-red-950">
+<main class="flex min-h-screen justify-center bg-wood p-3 md:p-4">
   <section class="m-auto flex max-w-5xl flex-col items-center justify-center gap-y-6 rounded-xl bg-slate-50 px-4 py-6 dark:bg-neutral-800">
-    <a href="/" class="font-logo w-fit rounded-full bg-orange-800 px-8 py-2 text-5xl font-semibold -tracking-widest text-slate-50 shadow-xl md:text-6xl">CheLaburo</a>
+    <a href="/" class="font-logo w-fit rounded-full bg-orange-800 px-8 pt-2 text-5xl font-semibold -tracking-widest text-slate-50 shadow-xl md:text-6xl">CheLaburo</a>
     <p class="text-center text-2xl font-medium md:mx-auto md:w-3/4 dark:text-slate-50">
       Iniciá sesión <br />
       ¡y conectá con los servicios en tu zona!
@@ -36,7 +43,7 @@
         </form>
       </div>
       <div class="hidden w-full md:block">
-        <img src="https://placehold.co/460x620" class="rounded-xl shadow-xl" />
+        <img src="<c:url value='/images/registro/inicio-sesion.jpg'/>"  class="rounded-xl shadow-xl max-h-[80vh]" />
       </div>
     </div>
   </section>

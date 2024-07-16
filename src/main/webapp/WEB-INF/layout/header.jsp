@@ -4,7 +4,7 @@
 	<nav id="myNav" class="relative bg-stone-50 dark:bg-neutral-800 shadow">
 		<div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between px-4">
 			<div class="z-10 p-5">
-				<a class="font-logo text-3xl font-bold -tracking-widest text-orange-800 dark:text-slate-50" href="/">CheLaburo</a>
+				<a class="font-logo text-3xl font-bold -tracking-widest text-orange-800 dark:text-slate-50 select-none" href="/">CheLaburo</a>
 			</div>
 
 			<button id="menu-button" type="button"
