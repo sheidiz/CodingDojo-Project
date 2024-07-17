@@ -13,41 +13,44 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="coupons")
+@Table(name = "coupons")
 public class Coupon {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty(message="El nombre no puede estar vacio")
+	@NotEmpty(message = "El nombre no puede estar vacio")
+	@Size(min = 2, message = "El nombre tiene que tener al menos 2 caracteres.")
 	private String name;
-	
+
 	@NotEmpty
 	private String description;
-	
+
 	@NotEmpty
 	private Long discount;
-	
+
 	@NotEmpty
-	private Long limit;
-	
+	private Double couponLimit;
+
 	@NotEmpty
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date expiration;
 
-	@Column(updatable=false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
-	
-	@Column(updatable=false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-	
-	public Coupon() {}
-	
+
+	public Coupon() {
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -80,12 +83,12 @@ public class Coupon {
 		this.discount = discount;
 	}
 
-	public Long getLimit() {
-		return limit;
+	public Double getCouponLimit() {
+		return couponLimit;
 	}
 
-	public void setLimit(Long limit) {
-		this.limit = limit;
+	public void setCouponLimit(Double couponLimit) {
+		this.couponLimit = couponLimit;
 	}
 
 	public Date getExpiration() {
@@ -113,13 +116,13 @@ public class Coupon {
 	}
 
 	@PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = new Date();
-    }
-	
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
+
 }

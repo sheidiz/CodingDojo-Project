@@ -2,34 +2,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <main class="bg-stone-50 py-5 dark:bg-neutral-800">
 	<ul class="mx-auto flex max-w-screen-lg flex-wrap justify-center gap-4 lg:gap-10">
-		<li class="h-16 w-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:h-20 md:w-20 md:p-2 hover:scale-110">
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/mudanzas">
 				<img src="<c:url value='/images/home/Mudanzas.png'/>" alt="Mudanzas" />
 			</a>
 		</li>
-		<li class="h-16 w-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:h-20 md:w-20 md:p-2 hover:scale-110">
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/jardineria">
 				<img src="<c:url value='/images/home/Jardineria.png'/>" alt="Jardineria" />
 			</a>
 		</li>
-		<li class="h-16 w-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:h-20 md:w-20 md:p-2 hover:scale-110">
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/electricistas">
 				<img src="<c:url value='/images/home/Electricista.png'/>" alt="Electricista" />
 			</a>
 		</li>
-		<li class="h-16 w-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:h-20 md:w-20 md:p-2 hover:scale-110">
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/pintores">
 				<img src="<c:url value='/images/home/Pintura.png'/>" alt="Pintor" />
 			</a>
 		</li>
-		<li class="h-16 w-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:h-20 md:w-20 md:p-2 hover:scale-110">
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/reparaciones">
 				<img src="<c:url value='/images/home/Reparaciones.png'/>" alt="Reparaciones" />
 			</a>
 		</li>
-		<li class="h-16 w-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:h-20 md:w-20 md:p-2 hover:scale-110">
-			<a href="/servicios/otros">
-				<img src="<c:url value='/images/home/Otros.png'/>" alt="Otros" />
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
+			<a href="/servicios/limpieza">
+				<img src="<c:url value='/images/home/Limpieza.png'/>" alt="Limpieza" />
 			</a>
 		</li>
 	</ul>
@@ -108,8 +108,6 @@
 	    </div>
 	  </div>
 	</div>
-
-
 
 	<script>
 		var swiper = new Swiper(".mySwiper", {
