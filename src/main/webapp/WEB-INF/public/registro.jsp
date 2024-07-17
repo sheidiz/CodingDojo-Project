@@ -31,29 +31,29 @@
         <p class="pb-2 text-center text-2xl font-medium text-slate-50 md:pb-5 md:text-4xl">¡Bienvenido/a!</p>
         <form:form action="/register" method="POST" modelAttribute="newUser" class="my-2 flex flex-col gap-y-2 rounded-md bg-slate-50 px-6 py-6 dark:bg-orange-800">
           <div>
-            <form:label path="FullName" >Nombre completo</form:label>
-            <form:input  path="FullName" type="text" id="name" placeholder="Juan Perez" class="my-1 w-full rounded-full border px-2 py-1" />
-            <p class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorNombre}</p>
+            <form:label path="fullName" >Nombre completo</form:label>
+            <form:input  path="fullName" type="text" id="name" placeholder="Juan Perez" class="my-1 w-full rounded-full border px-2 py-1" />
+            <form:errors path="fullName" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
-            <form:label path="PhoneNumber" >Teléfono (opcional)</form:label>
-            <form:input path="PhoneNumber" type="tel" id="phone" placeholder="011 1111 1111" class="my-1 w-full rounded-full border px-2 py-1" />
-            <p class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorTelefono}</p>
+            <form:label path="phoneNumber" >Teléfono (opcional)</form:label>
+            <form:input path="phoneNumber" type="tel" id="phone" placeholder="011 1111 1111" class="my-1 w-full rounded-full border px-2 py-1" />
+            <form:errors path="phoneNumber" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
             <form:label path="email" >Email</form:label>
             <form:input path="email"  type="email" id="email" placeholder="juan.perez@email.com" class="my-1 w-full rounded-full border px-2 py-1" />
-            <p class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorEmail}</p>
+            <form:errors path="email" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
             <form:label path="password" >Contraseña</form:label>
             <form:input path="password" type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
-            <p class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorContraseña}</p>
+            <form:errors path="password" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
             <form:label path="confirm" >Repetir contraseña</form:label>
             <form:input path="confirm" type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
-            <p class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorConfirmacion}</p>
+            <form:errors path="confirm" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <input type="submit" value="Registrarme" class="cursor-pointer my-1 rounded-full bg-zinc-900 py-1 text-slate-300 hover:text-slate-50" />
           <p class="mt-1 text-sm">¿Ya tenés una cuenta? <a class="font-semibold underline" href="/iniciar-sesion">Inicia sesión</a></p>

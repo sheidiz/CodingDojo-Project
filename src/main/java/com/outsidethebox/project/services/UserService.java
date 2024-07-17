@@ -23,7 +23,7 @@ public class UserService {
 		String email = newUser.getEmail();
 		User userExist= ur.findByEmail(email);
 		if(userExist != null) {
-			result.rejectValue("email", "Unique", "el email ya fue utilizado.");
+			result.rejectValue("email", "Unique", "Ya existe un usuario con este email.");
 		}
 		if(result.hasErrors()) {
 			return null;

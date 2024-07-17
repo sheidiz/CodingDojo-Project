@@ -14,6 +14,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -24,25 +25,23 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty (message= "Coloque su nombre completo")
+	@NotBlank(message="Coloque su nombre completo")
+	@Size(min=8, message="El nombre completo debe contener al menos 8 caracteres.")
+	private String fullName;
 	
-	@Size (min=8, message= "Tu nombre completo debe contener al menos 8 caracteres.")
-	private String FullName;
+	private String phoneNumber;
 	
-	@NotEmpty(message="Coloque su numero")
-	private String PhoneNumber;
-	
-	@NotEmpty (message="Coloque su Email")
+	@NotEmpty(message="Coloque su Email")
 	@Email(message="email invalido")
 	private String email;
 	
-	@NotEmpty (message="Coloque su contraseña")
-	@Size (min=6, message="tu Contraseña necesita al menos 6 caracteres.")
+	@NotEmpty(message="Coloque su contraseña")
+	@Size(min=6, message="La contraseña necesita al menos 6 caracteres.")
 	private String password;
 	
 	@Transient
-	@NotEmpty (message="Coloque su contraseña otra vez")
-	@Size (min=6, message="tu Contraseña necesita al menos 6 caracteres.")
+	@NotEmpty(message="Coloque su contraseña otra vez")
+	@Size(min=6, message="La contraseña necesita al menos 6 caracteres.")
 	private String confirm;
 	
 	@Column(updatable=false)
@@ -63,19 +62,19 @@ public class User {
 	}
 
 	public String getFullName() {
-		return FullName;
+		return fullName;
 	}
 
 	public void setFullName(String fullName) {
-		FullName = fullName;
+		this.fullName = fullName;
 	}
 
 	public String getPhoneNumber() {
-		return PhoneNumber;
+		return phoneNumber;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		PhoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {

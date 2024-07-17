@@ -25,8 +25,11 @@ public class UserController {
 	
 	
 	@GetMapping("/registro")
-	public String signup(Model model, @ModelAttribute("newUser") User newUser) {
-		model.addAttribute("userInSession", usuarioProvisorio);
+	public String signup(Model model, @ModelAttribute("newUser") User newUser, HttpSession session) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if(userTemp != null) {
+			return "redirect:/";
+		}
 		return "public/registro.jsp"; 
 	}
 	@PostMapping("/register")
@@ -36,30 +39,34 @@ public class UserController {
 		serv.register(newUser, result);
 		
 		if(result.hasErrors()) {
-			return "registro.jsp";
+			return "public/registro.jsp"; 
 		} else {
 			session.setAttribute("userInSession", newUser);
 			return "redirect:/";
 		}
 		
 	}
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public String login(Model model, @RequestParam("email") String email,
 			@RequestParam("password") String password,
 			RedirectAttributes redirectAttributes,   
 			HttpSession session) {
-		model.addAttribute("userInSession", usuarioProvisorio);
 		
 		User userTryingLogin = serv.login(email, password);
 		
 		if(userTryingLogin == null) {
 		
-			redirectAttributes.addFlashAttribute("errorLogin", "email/password incorrectos");
+			redirectAttributes.addFlashAttribute("errorLogin", "email/contraseña incorrectos");
 			return "redirect:/iniciar-sesion";
 		} else {
 			session.setAttribute("userInSession", userTryingLogin);
 			return "redirect:/";
 		}
+	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("userInSession");
+		return "redirect:/";
 	}
 	
 }
