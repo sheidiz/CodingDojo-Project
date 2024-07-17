@@ -38,6 +38,29 @@ body {
 	background: url("../images/registro/bg.jpg") center center/cover no-repeat fixed;
 }
 
+.bg-Mudanzas {
+	background-image: url("../images/categorias/Mudanzas.jpg");
+}
+
+.bg-Jardineria {
+	background-image: url("../images/categorias/Jardineria.jpg");
+}
+
+.bg-Electricistas {
+	background-image: url("../images/categorias/Electricistas.jpg");
+}
+
+.bg-Pintores {
+	background-image: url("../images/categorias/Pintores.jpg");
+}
+
+.bg-Reparaciones {
+	background-image: url("../images/categorias/Reparaciones.jpg");
+}
+
+.bg-Limpieza {
+	background-image: url("../images/categorias/Limpieza.jpg");
+}
 
 
 @media (prefers-color-scheme: dark) {
