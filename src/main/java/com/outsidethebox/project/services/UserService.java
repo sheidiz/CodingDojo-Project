@@ -33,4 +33,19 @@ public class UserService {
 			return ur.save(newUser);
 		}
 	}
+	
+	public User login(String email, String password) {
+		
+		User userTryingLogin= ur.findByEmail(email);
+		
+		if (userTryingLogin == null) {
+			return null;
+		}
+		
+		if (BCrypt.checkpw(password, userTryingLogin.getPassword())) {
+			return userTryingLogin;
+		} else {
+			return null;
+		}
+	}
 }

@@ -28,14 +28,14 @@
     <div class="w-full items-center justify-center gap-5 rounded-xl bg-orange-800 p-4 md:flex dark:bg-transparent">
       <div class="w-full">
         <p class="pb-2 text-center text-2xl font-medium text-slate-50 md:pb-5 md:text-4xl">¡Hola de nuevo!</p>
-        <form class="my-5 flex flex-col gap-y-2 rounded-md bg-slate-50 px-6 py-10 dark:bg-orange-800">
+        <form action="/login" method="POST" class="my-5 flex flex-col gap-y-2 rounded-md bg-slate-50 px-6 py-10 dark:bg-orange-800">
           <div>
             <label>Email</label>
-            <input type="email" id="email" placeholder="juan.perez@email.com" class="my-1 w-full rounded-full border px-2 py-1" />
+            <input type="email" id="email" placeholder="juan.perez@email.com" class="my-1 w-full rounded-full border px-2 py-1" name="email" />
           </div>
           <div>
             <label>Contraseña</label>
-            <input type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
+            <input type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" name="password" />
           </div>
           <p class="block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorLogin}</p>
           <input type="submit" value="Iniciar sesión" class="cursor-pointer my-1 rounded-full bg-zinc-900 py-1 text-slate-300 hover:text-slate-50" />

@@ -28,13 +28,6 @@ public class MainController {
 		model.addAttribute("userInSession", usuarioProvisorio);
 		return "public/inicio-sesion.jsp";
 	}
-	
-	@GetMapping("/registro")
-	public String signup(Model model) {
-		model.addAttribute("userInSession", usuarioProvisorio);
-		return "public/registro.jsp"; 
-	}
-	
 	@GetMapping("/servicios")
 	public String servicios(Model model) {
 		model.addAttribute("userInSession", usuarioProvisorio);
