@@ -39,7 +39,7 @@
           </div>
           <p class="block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700">${errorLogin}</p>
           <input type="submit" value="Iniciar sesión" class="cursor-pointer my-1 rounded-full bg-zinc-900 py-1 text-slate-300 hover:text-slate-50" />
-          <p class="mt-1 text-sm">¿Todavía no tenés una cuenta? <a class="font-semibold underline" href="/registro">Registrate</a></p>
+          <p class="mt-1 text-sm dark:text-stone-50">¿Todavía no tenés una cuenta? <a class="font-semibold underline" href="/registro">Registrate</a></p>
         </form>
       </div>
       <div class="hidden w-full md:block">

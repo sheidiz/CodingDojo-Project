@@ -56,7 +56,7 @@
             <form:errors path="confirm" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <input type="submit" value="Registrarme" class="cursor-pointer my-1 rounded-full bg-zinc-900 py-1 text-slate-300 hover:text-slate-50" />
-          <p class="mt-1 text-sm">¿Ya tenés una cuenta? <a class="font-semibold underline" href="/iniciar-sesion">Inicia sesión</a></p>
+          <p class="mt-1 text-sm dark:text-stone-50">¿Ya tenés una cuenta? <a class="font-semibold underline" href="/iniciar-sesion">Inicia sesión</a></p>
         </form:form >
       </div>
       <div class="hidden w-full md:block">
