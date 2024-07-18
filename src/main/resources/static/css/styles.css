@@ -62,6 +62,10 @@ body {
 	background-image: url("../images/categorias/Limpieza.jpg");
 }
 
+.accordion-content {
+            display: none;
+}
+
 
 @media (prefers-color-scheme: dark) {
 	.bg-wood {
