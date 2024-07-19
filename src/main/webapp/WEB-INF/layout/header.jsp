@@ -52,11 +52,11 @@
 				<c:choose>
 					<c:when test="${not empty userInSession}">
 						<a href="/mi-perfil" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Mi Perfil</a>
-						<a href="/logout" class="rounded-full bg-neutral-700 px-4 py-2 font-medium text-stone-50 dark:bg-stone-50 dark:text-orange-800">Cerrar sesión</a>
+						<a href="/logout" class="rounded-full bg-neutral-700 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">Cerrar sesión</a>
 					</c:when>
 					<c:otherwise>
 						<a href="/iniciar-sesion" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Iniciar sesión</a>
-						<a href="/registro" class="rounded-full bg-neutral-800 px-4 py-2 font-medium text-stone-50 dark:bg-stone-50 dark:text-orange-800">Únete</a>
+						<a href="/registro" class="rounded-full bg-neutral-800 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">Únete</a>
 					</c:otherwise>
 				</c:choose>
 			</div>

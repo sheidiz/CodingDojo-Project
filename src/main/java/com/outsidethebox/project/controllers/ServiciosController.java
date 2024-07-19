@@ -23,7 +23,7 @@ public class ServiciosController {
 	}
 
 	@GetMapping("/servicios/mudanzas")
-	public String serviciosMudanzas(HttpSession session, Model model) {
+	public String serviceMudanzas(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
@@ -35,7 +35,7 @@ public class ServiciosController {
 	}
 
 	@GetMapping("/servicios/jardineria")
-	public String serviciosJardineria(HttpSession session, Model model) {
+	public String serviceJardineria(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
@@ -47,7 +47,7 @@ public class ServiciosController {
 	}
 
 	@GetMapping("/servicios/electricistas")
-	public String serviciosElectricistas(HttpSession session, Model model) {
+	public String serviceElectricistas(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
@@ -59,7 +59,7 @@ public class ServiciosController {
 	}
 
 	@GetMapping("/servicios/pintores")
-	public String serviciosPintores(HttpSession session, Model model) {
+	public String servicePintores(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
@@ -71,7 +71,7 @@ public class ServiciosController {
 	}
 
 	@GetMapping("/servicios/reparaciones")
-	public String serviciosReparaciones(HttpSession session, Model model) {
+	public String serviceReparaciones(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
@@ -83,13 +83,37 @@ public class ServiciosController {
 	}
 
 	@GetMapping("/servicios/limpieza")
-	public String serviciosLimpieza(HttpSession session, Model model) {
+	public String serviceLimpieza(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
 		}
 		ModelUtils.setupModelCategory(userTemp, model, "Limpieza", "Limpieza");
 
+		return "index.jsp";
+	}
+
+	@GetMapping("/servicios/categoria/id")
+	public String publication(HttpSession session, Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+
+		ModelUtils.setupModel(userTemp, model, "Categoria - Flete Carlitos", "/private/publicacion.jsp");
+
+		return "index.jsp";
+	}
+	
+	@GetMapping("/ordenes/id")
+	public String review(HttpSession session, Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+		
+		ModelUtils.setupModel(userTemp, model, "Orden - Mudanzas - Flete Carlitos", "/private/review.jsp");
+		
 		return "index.jsp";
 	}
 

@@ -14,12 +14,12 @@
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/electricistas">
-				<img src="<c:url value='/images/home/Electricista.png'/>" alt="Electricista" />
+				<img src="<c:url value='/images/home/Electricistas.png'/>" alt="Electricista" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/pintores">
-				<img src="<c:url value='/images/home/Pintura.png'/>" alt="Pintor" />
+				<img src="<c:url value='/images/home/Pintores.png'/>" alt="Pintor" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">

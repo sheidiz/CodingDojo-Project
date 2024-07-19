@@ -4,8 +4,10 @@ public enum Category {
 	Electricista,
     Gasista,
     Pintor,
+    Plomero,
     Albañil,
     Carpintero,
     Jardinero,
-    Fletero
+    Fletero,
+    Otro
 }
