@@ -1,14 +1,17 @@
 package com.outsidethebox.project.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -43,6 +46,12 @@ public class User {
 	@NotEmpty(message="Coloque su contraseña otra vez")
 	@Size(min=6, message="La contraseña necesita al menos 6 caracteres.")
 	private String confirm;
+
+	@OneToMany(mappedBy="supplier", cascade=CascadeType.ALL)
+	private List<Post> supplierPost;
+	
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Order> clientOrders;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -117,6 +126,22 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 	
+	public List<Post> getSupplierPost() {
+		return supplierPost;
+	}
+
+	public void setSupplierPost(List<Post> supplierPost) {
+		this.supplierPost = supplierPost;
+	}
+
+	public List<Order> getClientOrders() {
+		return clientOrders;
+	}
+
+	public void setClientOrders(List<Order> clientOrders) {
+		this.clientOrders = clientOrders;
+	}
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();

@@ -1,14 +1,17 @@
 package com.outsidethebox.project.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -40,6 +43,9 @@ public class Coupon {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date expiration;
 
+	@OneToMany(mappedBy="couponOrder", cascade=CascadeType.ALL)
+	private List<Order> ordersCoupon; //Relacion con Order
+	
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -113,6 +119,14 @@ public class Coupon {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	
+	public List<Order> getOrdersCoupon() {
+		return ordersCoupon;
+	}
+
+	public void setOrdersCoupon(List<Order> ordersCoupon) {
+		this.ordersCoupon = ordersCoupon;
 	}
 
 	@PrePersist

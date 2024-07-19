@@ -1,16 +1,22 @@
 package com.outsidethebox.project.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -18,7 +24,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Posts")
+@Table(name="posts")
 public class Post {
 
     @Id
@@ -36,11 +42,22 @@ public class Post {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Category category;
-
+    
+    @NotNull
+    @Size(message="Debe agregar un precio")
+    private double price;
+    
     @NotNull
     @Enumerated(EnumType.STRING)
     private SubCategory subCategory;
-
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="supplier_id")
+	private	User supplier;
+    
+    @OneToMany(mappedBy="postOrder", cascade=CascadeType.ALL)
+    private List<Order> ordersPost; //Relacion con Order
+    
     @Column(updatable=false)
     @DateTimeFormat(pattern="YYYY-MM-DD")
     private Date createdAt;
@@ -104,7 +121,31 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
-    public Post() {
+    public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public User getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(User supplier) {
+		this.supplier = supplier;
+	}
+
+	public List<Order> getOrdersPost() {
+		return ordersPost;
+	}
+
+	public void setOrdersPost(List<Order> ordersPost) {
+		this.ordersPost = ordersPost;
+	}
+
+	public Post() {
     }
 
     public Post(Long id, String title, String description, Category category, SubCategory subCategory, Date createdAt, Date updatedAt) {

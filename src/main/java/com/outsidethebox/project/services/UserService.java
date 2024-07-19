@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import com.outsidethebox.project.models.Post;
 import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.repositories.UserRepository;
 
@@ -48,4 +49,8 @@ public class UserService {
 			return null;
 		}
 	}
+	
+	public User findById(Long id) {
+        return ur.findById(id).orElse(null);
+    }
 }
