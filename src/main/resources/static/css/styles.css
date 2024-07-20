@@ -75,6 +75,10 @@ body {
 	background-image: url("../images/categorias/Review.jpg");
 }
 
+.bg-perfil {
+	background-image: url("../images/perfil/Perfil.jpg");
+}
+
 .accordion-content {
 	display: none;
 }

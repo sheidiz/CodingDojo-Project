@@ -31,7 +31,7 @@
 					<c:choose>
 						<c:when test="${not empty userInSession}">
 							<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hidden md:hover:bg-transparent">
-								<a href="/mi-perfil" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Mi Perfil</a>
+								<a href="/perfil" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Mi Perfil</a>
 							</li>
 							<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hidden md:hover:bg-transparent">
 								<a href="/logout" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Cerrar sesión</a>
@@ -51,7 +51,7 @@
 			<div class="hidden md:block">
 				<c:choose>
 					<c:when test="${not empty userInSession}">
-						<a href="/mi-perfil" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Mi Perfil</a>
+						<a href="/perfil" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Mi Perfil</a>
 						<a href="/logout" class="rounded-full bg-neutral-700 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">Cerrar sesión</a>
 					</c:when>
 					<c:otherwise>
