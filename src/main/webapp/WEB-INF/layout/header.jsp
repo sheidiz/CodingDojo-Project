@@ -12,14 +12,43 @@
 				aria-expanded="false">
 				<span class="sr-only">Abrir menu</span>
 				<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
 						clip-rule="evenodd"></path>
-        </svg>
+                </svg>
 			</button>
 			<div id="mobile-menu" class="w-full z-10 hidden absolute md:static top-16 left-0 md:flex md:w-auto bg-stone-50 dark:bg-neutral-800 shadow md:shadow-none">
 				<ul class="mt-4 flex flex-col gap-y-2 py-3 text-lg font-medium duration-500 md:mt-0 md:flex-row md:gap-y-0 md:space-x-8 md:py-0 md:text-xl">
-					<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hover:bg-transparent">
-						<a href="/servicios" class="menu-link block text-neutral-800 hover:text-stone-50 md:hover:text-orange-700 dark:text-stone-100 md:dark:hover:text-orange-500">Servicios</a>
+					<li class="relative">
+						<button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" aria-expanded="false"
+							class="flex items-center justify-between w-full rounded-md border-0 outline-0 px-4 py-2 hover:bg-orange-700 md:hover:bg-transparent block text-neutral-800 hover:text-stone-50 md:hover:text-orange-700 dark:text-stone-100 md:dark:hover:text-orange-500">
+							Servicios
+							<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+						      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+						    </svg>
+						</button>
+						<!-- Dropdown menu -->
+						<div id="dropdownNavbar" class="hidden static md:absolute z-10 font-normal bg-white rounded-lg shadow w-full md:w-40 dark:bg-neutral-700 mt-2">
+						    <ul class="py-2 text-sm text-neutral-800 dark:text-stone-100">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						            <a href="/servicios/mudanzas" class="block">Mudanzas</a>
+						        </li>
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						            <a href="/servicios/jardineria" class="block">Jardinería</a>
+						        </li>
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						            <a href="/servicios/electricistas" class="block">Electricistas</a>
+						        </li>
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						            <a href="/servicios/pintores" class="block">Pintores</a>
+						        </li>
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						            <a href="/servicios/reparaciones" class="block">Reparaciones</a>
+						        </li>
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						            <a href="/servicios/limpieza" class="block">Limpieza</a>
+						        </li>
+						    </ul>
+						</div>
 					</li>
 					<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hover:bg-transparent">
 						<a href="/nosotros" class="menu-link block text-neutral-800 hover:text-stone-50 md:hover:text-orange-700 dark:text-stone-100 md:dark:hover:text-orange-500">Nosotros</a>

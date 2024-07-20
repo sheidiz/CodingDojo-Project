@@ -22,10 +22,10 @@
             <span class="block text-sm font-semibold mb-4">Compañia</span>
             <ul class="list-unstyled">
               <li>
-                <a class="block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">Sobre nosotros</a>
+                <a class="block pb-2 text-sm" href="/nosotros">Sobre nosotros</a>
               </li>
               <li>
-                <a class="block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Nuestro propósito</a>
+                <a class="block pb-2 text-sm" href="/nosotros#proposito">Nuestro propósito</a>
               </li>
             </ul>
           </div>

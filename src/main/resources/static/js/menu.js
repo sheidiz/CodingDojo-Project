@@ -28,4 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			mobileMenu.classList.remove('block');
 		});
 	});
+
+	// Toggle dropdown menu for "Servicios" on mobile
+	const dropdownButton = document.getElementById('dropdownNavbarLink');
+	const dropdownMenu = document.getElementById('dropdownNavbar');
+
+	 if (dropdownButton && dropdownMenu) {
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    }
 });
