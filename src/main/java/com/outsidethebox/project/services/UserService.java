@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import com.outsidethebox.project.models.Post;
 import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.repositories.UserRepository;
 
@@ -16,7 +15,7 @@ public class UserService {
 	private UserRepository ur;
 	
 	public User register(User newUser, BindingResult result) {
-		String password =newUser.getPassword();
+		String password = newUser.getPassword();
 		String confirm = newUser.getConfirm();
 		if (!password.equals(confirm)) {
 			result.rejectValue("confirm", "Matches", "Las contraseñas no son iguales.");

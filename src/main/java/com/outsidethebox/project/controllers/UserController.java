@@ -28,19 +28,43 @@ public class UserController {
 		if (userTemp != null) {
 			return "redirect:/";
 		}
+		model.addAttribute("supplier", false);
 		return "public/registro.jsp";
 	}
-
-	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute("newUser") User newUser, BindingResult result, HttpSession session) {
-		serv.register(newUser, result);
-
-		if (result.hasErrors()) {
-			return "public/registro.jsp";
+	
+	@GetMapping("/registro_laburante")
+	public String signupSupplier(Model model, @ModelAttribute("newUser") User newUser, HttpSession session) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp != null) {
+			return "redirect:/";
 		}
+		model.addAttribute("supplier", true);
+		return "public/registro_laburante.jsp";
+	}
+	
+	
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute("newUser") User newUser, 
+	                       BindingResult result, 
+	                       HttpSession session, 
+	                       @ModelAttribute("supplier") boolean supplier, 
+	                       Model model) {
 
-		session.setAttribute("userInSession", newUser);
-		return "redirect:/";
+	    // Si hay errores de validación, vuelve a mostrar el formulario adecuado
+	    if (result.hasErrors()) {
+	        if (supplier) {
+	            model.addAttribute("supplier", true);
+	            return "public/registro_laburante.jsp";
+	        } else {
+	            model.addAttribute("supplier", false);
+	            return "public/registro.jsp";
+	        }
+	    }
+
+	    // Registro del usuario
+	    serv.register(newUser, result);
+	    session.setAttribute("userInSession", newUser);
+	    return "redirect:/";
 	}
 
 	@GetMapping("/iniciar-sesion")

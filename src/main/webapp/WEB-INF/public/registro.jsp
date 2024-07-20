@@ -30,6 +30,7 @@
       <div class="w-full">
         <p class="pb-2 text-center text-2xl font-medium text-slate-50 md:pb-5 md:text-4xl">¡Bienvenido/a!</p>
         <form:form action="/register" method="POST" modelAttribute="newUser" class="my-2 flex flex-col gap-y-2 rounded-md bg-slate-50 px-6 py-6 dark:bg-orange-800">
+		<input type="hidden" name="supplier" value="false" />
           <div>
             <form:label path="fullName" >Nombre completo</form:label>
             <form:input  path="fullName" type="text" id="name" placeholder="Juan Perez" class="my-1 w-full rounded-full border px-2 py-1" />
@@ -52,11 +53,12 @@
           </div>
           <div>
             <form:label path="confirm" >Repetir contraseña</form:label>
-            <form:input path="confirm" type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
+            <form:input path="confirm" type="password" id="confirm" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
             <form:errors path="confirm" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <input type="submit" value="Registrarme" class="cursor-pointer my-1 rounded-full bg-zinc-900 py-1 text-slate-300 hover:text-slate-50" />
           <p class="mt-1 text-sm dark:text-stone-50">¿Ya tenés una cuenta? <a class="font-semibold underline" href="/iniciar-sesion">Inicia sesión</a></p>
+          <p class="mt-1 text-sm dark:text-stone-50">¿Te gustaría ofrecer tus servicios? <a class="font-semibold underline" href="/registro_laburante">Registrate aquí</a></p>                 
         </form:form >
       </div>
       <div class="hidden w-full md:block">

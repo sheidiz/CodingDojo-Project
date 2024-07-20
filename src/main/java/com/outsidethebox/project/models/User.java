@@ -17,8 +17,8 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -28,7 +28,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message="Coloque su nombre completo")
+	@NotEmpty(message="Coloque su nombre completo")
 	@Size(min=8, message="El nombre completo debe contener al menos 8 caracteres.")
 	private String fullName;
 	
@@ -41,6 +41,9 @@ public class User {
 	@NotEmpty(message="Coloque su contraseña")
 	@Size(min=6, message="La contraseña necesita al menos 6 caracteres.")
 	private String password;
+	
+	@NotNull
+	private boolean supplier;
 	
 	@Transient
 	@NotEmpty(message="Coloque su contraseña otra vez")
@@ -125,7 +128,15 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
+	public boolean isSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(boolean supplier) {
+		this.supplier = supplier;
+	}
+
 	public List<Post> getSupplierPost() {
 		return supplierPost;
 	}
