@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.outsidethebox.project.models.Post;
+import com.outsidethebox.project.models.Category;
 import com.outsidethebox.project.services.PostService;
 
 @Controller
@@ -34,6 +35,13 @@ public class PostController {
         } else {
             return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
         }
+    }
+
+    @GetMapping("/category/{category}")
+    public String findByCategory(@PathVariable Category category, Model model) {
+        List<Post> posts = postService.findByCategory(category);
+        model.addAttribute("posts", posts);
+        return "posts/list"; // Utiliza la misma vista de lista de posts
     }
 
     @GetMapping("/new")

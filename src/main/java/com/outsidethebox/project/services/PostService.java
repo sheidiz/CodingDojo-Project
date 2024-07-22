@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.outsidethebox.project.models.Post;
+import com.outsidethebox.project.models.Category;
 import com.outsidethebox.project.repositories.PostRepository;
 
 @Service
@@ -21,6 +22,10 @@ public class PostService {
 
     public Post findById(Long id) {
         return postRepository.findById(id).orElse(null);
+    }
+
+    public List<Post> findByCategory(Category category) {
+        return postRepository.findByCategory(category);
     }
 
     public Post save(Post post, BindingResult result) {
