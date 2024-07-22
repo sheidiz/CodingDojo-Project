@@ -27,67 +27,79 @@ public class ServiciosController {
         return "redirect:/servicios/mudanzas";
     }
 
-    @GetMapping("/servicios/electricista")
-    public String serviceElectricista(HttpSession session, Model model) {
+    @GetMapping("/servicios/mudanzas")
+    public String serviceMudanzas(HttpSession session, Model model) {
+        User userTemp = (User) session.getAttribute("userInSession");
+        if (userTemp == null) {
+            return "redirect:/iniciar-sesion";
+        }
+
+        ModelUtils.setupModelCategory(userTemp, model, "Mudanzas", "Mudanzas");
+        model.addAttribute("posts", postService.findByCategory(Category.Fletero)); // Assuming "Mudanzas" corresponds to "Fletero"
+
+        return "index.jsp";
+    }
+
+    @GetMapping("/servicios/jardineria")
+    public String serviceJardineria(HttpSession session, Model model) {
+        User userTemp = (User) session.getAttribute("userInSession");
+        if (userTemp == null) {
+            return "redirect:/iniciar-sesion";
+        }
+
+        ModelUtils.setupModelCategory(userTemp, model, "Jardinería", "Jardinero");
+        model.addAttribute("posts", postService.findByCategory(Category.Jardinero));
+
+        return "index.jsp";
+    }
+
+    @GetMapping("/servicios/electricistas")
+    public String serviceElectricistas(HttpSession session, Model model) {
         User userTemp = (User) session.getAttribute("userInSession");
         if (userTemp == null) {
             return "redirect:/iniciar-sesion";
         }
 
         ModelUtils.setupModelCategory(userTemp, model, "Electricistas", "Electricista");
-        model.addAttribute("posts", postService.findByCategory(Category.Electricista)); // Añadir lista de posts
+        model.addAttribute("posts", postService.findByCategory(Category.Electricista));
 
         return "index.jsp";
     }
 
-    @GetMapping("/servicios/gasista")
-    public String serviceGasista(HttpSession session, Model model) {
-        User userTemp = (User) session.getAttribute("userInSession");
-        if (userTemp == null) {
-            return "redirect:/iniciar-sesion";
-        }
-
-        ModelUtils.setupModelCategory(userTemp, model, "Gasistas", "Gasista");
-        model.addAttribute("posts", postService.findByCategory(Category.Gasista)); // Añadir lista de posts
-
-        return "index.jsp";
-    }
-
-    @GetMapping("/servicios/pintor")
-    public String servicePintor(HttpSession session, Model model) {
+    @GetMapping("/servicios/pintores")
+    public String servicePintores(HttpSession session, Model model) {
         User userTemp = (User) session.getAttribute("userInSession");
         if (userTemp == null) {
             return "redirect:/iniciar-sesion";
         }
 
         ModelUtils.setupModelCategory(userTemp, model, "Pintores", "Pintor");
-        model.addAttribute("posts", postService.findByCategory(Category.Pintor)); // Añadir lista de posts
+        model.addAttribute("posts", postService.findByCategory(Category.Pintor));
 
         return "index.jsp";
     }
 
-    @GetMapping("/servicios/plomero")
-    public String servicePlomero(HttpSession session, Model model) {
+    @GetMapping("/servicios/reparaciones")
+    public String serviceReparaciones(HttpSession session, Model model) {
         User userTemp = (User) session.getAttribute("userInSession");
         if (userTemp == null) {
             return "redirect:/iniciar-sesion";
         }
 
-        ModelUtils.setupModelCategory(userTemp, model, "Plomeros", "Plomero");
-        model.addAttribute("posts", postService.findByCategory(Category.Plomero)); // Añadir lista de posts
+        ModelUtils.setupModelCategory(userTemp, model, "Reparaciones", "Reparaciones");
+        model.addAttribute("posts", postService.findByCategory(Category.Plomero)); // Assuming "Reparaciones" corresponds to "Plomero"
 
         return "index.jsp";
     }
 
-    @GetMapping("/servicios/albañil")
-    public String serviceAlbanil(HttpSession session, Model model) {
+    @GetMapping("/servicios/limpieza")
+    public String serviceLimpieza(HttpSession session, Model model) {
         User userTemp = (User) session.getAttribute("userInSession");
         if (userTemp == null) {
             return "redirect:/iniciar-sesion";
         }
-
-        ModelUtils.setupModelCategory(userTemp, model, "Albañiles", "Albañil");
-        model.addAttribute("posts", postService.findByCategory(Category.Albañil)); // Añadir lista de posts
+        ModelUtils.setupModelCategory(userTemp, model, "Limpieza", "Limpieza");
+        model.addAttribute("posts", postService.findByCategory(Category.Otro)); // Assuming "Limpieza" corresponds to "Otro"
 
         return "index.jsp";
     }
@@ -100,33 +112,33 @@ public class ServiciosController {
         }
 
         ModelUtils.setupModelCategory(userTemp, model, "Carpinteros", "Carpintero");
-        model.addAttribute("posts", postService.findByCategory(Category.Carpintero)); // Añadir lista de posts
+        model.addAttribute("posts", postService.findByCategory(Category.Carpintero));
 
         return "index.jsp";
     }
 
-    @GetMapping("/servicios/jardinero")
-    public String serviceJardinero(HttpSession session, Model model) {
+    @GetMapping("/servicios/plomero")
+    public String servicePlomero(HttpSession session, Model model) {
         User userTemp = (User) session.getAttribute("userInSession");
         if (userTemp == null) {
             return "redirect:/iniciar-sesion";
         }
 
-        ModelUtils.setupModelCategory(userTemp, model, "Jardineros", "Jardinero");
-        model.addAttribute("posts", postService.findByCategory(Category.Jardinero)); // Añadir lista de posts
+        ModelUtils.setupModelCategory(userTemp, model, "Plomeros", "Plomero");
+        model.addAttribute("posts", postService.findByCategory(Category.Plomero));
 
         return "index.jsp";
     }
 
-    @GetMapping("/servicios/fletero")
-    public String serviceFletero(HttpSession session, Model model) {
+    @GetMapping("/servicios/gasista")
+    public String serviceGasista(HttpSession session, Model model) {
         User userTemp = (User) session.getAttribute("userInSession");
         if (userTemp == null) {
             return "redirect:/iniciar-sesion";
         }
 
-        ModelUtils.setupModelCategory(userTemp, model, "Fleteros", "Fletero");
-        model.addAttribute("posts", postService.findByCategory(Category.Fletero)); // Añadir lista de posts
+        ModelUtils.setupModelCategory(userTemp, model, "Gasistas", "Gasista");
+        model.addAttribute("posts", postService.findByCategory(Category.Gasista));
 
         return "index.jsp";
     }
@@ -139,8 +151,33 @@ public class ServiciosController {
         }
 
         ModelUtils.setupModelCategory(userTemp, model, "Otros", "Otro");
-        model.addAttribute("posts", postService.findByCategory(Category.Otro)); // Añadir lista de posts
+        model.addAttribute("posts", postService.findByCategory(Category.Otro));
 
+        return "index.jsp";
+    }
+
+    // Additional methods from the second part
+    @GetMapping("/servicios/categoria/id")
+    public String publication(HttpSession session, Model model) {
+        User userTemp = (User) session.getAttribute("userInSession");
+        if (userTemp == null) {
+            return "redirect:/iniciar-sesion";
+        }
+
+        ModelUtils.setupModel(userTemp, model, "Categoria - Flete Carlitos", "/private/publicacion.jsp");
+
+        return "index.jsp";
+    }
+
+    @GetMapping("/ordenes/id")
+    public String review(HttpSession session, Model model) {
+        User userTemp = (User) session.getAttribute("userInSession");
+        if (userTemp == null) {
+            return "redirect:/iniciar-sesion";
+        }
+        
+        ModelUtils.setupModel(userTemp, model, "Orden - Mudanzas - Flete Carlitos", "/private/review.jsp");
+        
         return "index.jsp";
     }
 }

@@ -5,9 +5,10 @@ public enum Category {
     Gasista,
     Pintor,
     Plomero,
-    Albañil,
+    Reparaciones,
     Carpintero,
     Jardinero,
     Fletero,
+    Mudanzas,
     Otro
 }
