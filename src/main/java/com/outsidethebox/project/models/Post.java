@@ -24,109 +24,129 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 public class Post {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotNull
-    @Size(min=2, max=100, message="El título debe tener un mínimo de 2 caracteres")
-    private String title;
+	private boolean isHighlighted = false;
+	
+	@NotNull
+    private boolean statusPost = true;
 
-    @NotNull
-    @Size(min=2, max=200, message="El contenido debe tener un mínimo de 2 caracteres")
-    private String description;
+	@NotNull
+	@Size(min = 2, max = 100, message = "El título debe tener un mínimo de 2 caracteres")
+	private String title;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private Category category;
-    
-    @NotNull
-    @Size(message="Debe agregar un precio")
-    private double price;
-    
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private SubCategory subCategory;
-    
-    @ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="supplier_id")
-	private	User supplier;
-    
-    @OneToMany(mappedBy="postOrder", cascade=CascadeType.ALL)
-    private List<Order> ordersPost; //Relacion con Order
-    
-    @Column(updatable=false)
-    @DateTimeFormat(pattern="YYYY-MM-DD")
-    private Date createdAt;
+	@NotNull
+	@Size(min = 2, max = 200, message = "El contenido debe tener un mínimo de 2 caracteres")
+	private String description;
 
-    @DateTimeFormat(pattern="YYYY-MM-DD")
-    private Date updatedAt;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private Category category;
 
-    public Long getId() {
-        return id;
-    }
+	@NotNull
+	@Size(message = "Debe agregar un precio")
+	private double price;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private SubCategory subCategory;
 
-    public String getTitle() {
-        return title;
-    }
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "supplier_id")
+	private User supplier;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	@OneToMany(mappedBy = "postOrder", cascade = CascadeType.ALL)
+	private List<Order> ordersPost; // Relacion con Order
 
-    public String getDescription() {
-        return description;
-    }
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Review> reviews;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
 
-    public Category getCategory() {
-        return category;
-    }
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updatedAt;
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+	public Post() {
+	}
 
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
+	public Post(Long id, User supplier, String title, String description, Category category, SubCategory subCategory) {
+		this.id = id;
+		this.supplier = supplier;
+		this.title = title;
+		this.description = description;
+		this.category = category;
+		this.subCategory = subCategory;
+	}
 
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
-    }
+	public Post(User supplier, String title, String description, Category category, SubCategory subCategory) {
+		this.title = title;
+		this.supplier = supplier;
+		this.description = description;
+		this.category = category;
+		this.subCategory = subCategory;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	public boolean isHighlighted() {
+		return isHighlighted;
+	}
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	public void setHighlighted(boolean isHighlighted) {
+		this.isHighlighted = isHighlighted;
+	}
 
-    public double getPrice() {
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public double getPrice() {
 		return price;
 	}
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public SubCategory getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
 	}
 
 	public User getSupplier() {
@@ -145,35 +165,37 @@ public class Post {
 		this.ordersPost = ordersPost;
 	}
 
-	public Post() {
-    }
+	public List<Review> getReviews() {
+		return reviews;
+	}
 
-    public Post(Long id, String title, String description, Category category, SubCategory subCategory, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
-    public Post(String title, String description, Category category, SubCategory subCategory, Date createdAt, Date updatedAt) {
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-    }
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = new Date();
-    }
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 }

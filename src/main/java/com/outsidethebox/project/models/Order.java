@@ -26,7 +26,7 @@ public class Order {
 	private Long id;
 	
 	@NotNull
-    private String category; 
+    private String category;
 
     @NotNull
     private String statusOrder; 

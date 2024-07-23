@@ -2,8 +2,8 @@ package com.outsidethebox.project.models;
 
 public enum SubCategory {
 	Mantenimiento,
-    Instalacion,
-    Reparacion,
-    Presupuesto
-
+    Instalación,
+    Reparación,
+    Presupuesto,
+    Fabricación
 }
