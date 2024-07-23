@@ -42,15 +42,4 @@ public class MainController {
 
 		return "index.jsp";
 	}
-
-	@GetMapping("/perfil")
-	public String perfil(Model model, HttpSession session) {
-		User userTemp = (User) session.getAttribute("userInSession");
-		if (userTemp == null) {
-			return "redirect:/iniciar-sesion";
-		}
-		ModelUtils.setupModel(userTemp, model, "Mi Perfil", "/private/perfil-laburante-publico.jsp");
-
-		return "index.jsp";
-	}
 }
