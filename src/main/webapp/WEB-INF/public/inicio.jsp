@@ -46,7 +46,7 @@
 		<h1 class="text-4xl font-logo font-semibold -tracking-widest text-neutral-700 drop-shadow-[0_4px_4px_rgba(117,117,117,1)] md:text-6xl dark:text-white dark:drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">CheLaburo</h1>
 	</div>
 
-	<div id="slider" class="w-full mb-3 py-[40px] bg-gradient-to-b from-white to-stone-200 dark:from-neutral-700 dark:to-neutral-700">
+	<div id="slider" class="w-full mb-3 py-5 bg-gradient-to-b from-white to-stone-200 dark:from-neutral-700 dark:to-neutral-700">
 		<h2 class="pb-2 text-neutral-800 dark:text-white text-2xl text-center font-phrase">Siempre a la mano.</h2>
 		<div class="swiper mySwiper mx-auto w-4/5">
 			<div class="swiper-wrapper p-2">

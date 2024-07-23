@@ -15,6 +15,7 @@ import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.services.OrderService;
 import com.outsidethebox.project.services.PostService;
 import com.outsidethebox.project.services.UserService;
+import com.outsidethebox.project.utils.ModelUtils;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -22,68 +23,82 @@ import jakarta.validation.Valid;
 @Controller
 public class OrderController {
 
-   @Autowired 
-   private OrderService os;
-   
-   @Autowired
-   private PostService ps;
-   
-   @Autowired 
-   private UserService us;
+	@Autowired
+	private OrderService os;
 
-   @GetMapping("/order/{postId}")
-   public String order(@PathVariable("postId") Long postId,
-		   			   HttpSession session,
-		   			   Model model) {
-	   User userTemp = (User) session.getAttribute("userInSession"); 
-       if (userTemp == null) {
-           return "redirect:/";
-       }
-       
-       Post post = ps.findById(postId);
-       if(post == null) {
-    	   return "redirect:/dashboard";
-       }
-       
-       Order order = new Order();
-       order.setPostOrder(post);
-       order.setCategory(post.getCategory().name());
-       order.setDescription(post.getDescription());
-       order.setPrice(post.getPrice());
-       
-       model.addAttribute("order", order);
-       model.addAttribute("post", post);
-       return "newOrder.jsp";
-   }
+	@Autowired
+	private PostService ps;
 
-   @PostMapping("/order/create")
-   public String orderCreate(@Valid @ModelAttribute("order") Order order,
-		   					 BindingResult result,
-                             HttpSession session) {
-	   User userTemp = (User) session.getAttribute("userInSession");
-       if (userTemp == null) {
-           return "redirect:/";
-       }
-       
-       if (result.hasErrors()) {
-           return "newOrder.jsp";
-       } else {
-           Post post = ps.findById(order.getPostOrder().getId());
-           order.setPostOrder(post);
-           User user = us.findById(userTemp.getId());
-           order.setClient(user);
-           
-           os.save(order);
+	@Autowired
+	private UserService us;
 
-           return "redirect:/dashboard";
-       }
-   }
+	// create order jsp
+	@GetMapping("/servicios/{categoria}/{id}")
+	public String publication(@PathVariable("categoria") String categoria, @PathVariable("id") Long id,
+			HttpSession session, Model model, @ModelAttribute("order") Order order) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+
+		User user = us.findById(userTemp.getId());
+		Post post = ps.findById(id);
+		Integer averageRating = ps.calculateAverageRatingByPost(post);
+		ModelUtils.setupModel(user, model, post.getTitle(), "/private/publicacion.jsp");
+		model.addAttribute("post", post);
+		model.addAttribute("rating", "Puntuacion" + averageRating);
+
+		return "index.jsp";
+	}
+
+	@PostMapping("/servicios/order/crear")
+	public String orderCreate(@Valid @ModelAttribute("order") Order order, BindingResult result, HttpSession session,
+			Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/";
+		}
+
+		User user = us.findById(userTemp.getId());
+		Post post = ps.findById(order.getPostOrder().getId());
+		if (result.hasErrors()) {
+			Integer averageRating = ps.calculateAverageRatingByPost(post);
+			ModelUtils.setupModel(user, model, post.getTitle(), "/private/publicacion.jsp");
+			model.addAttribute("post", post);
+			model.addAttribute("rating", "Puntuacion" + averageRating);
+			return "index.jsp";
+		}
+		order.setPostOrder(post);
+		order.setClient(user);
+
+		os.save(order);
+
+		return "redirect:/";
+
+	}
+
+	// see order jsp
+	@GetMapping("/order/{postId}")
+	public String order(@PathVariable("postId") Long postId, HttpSession session, Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/";
+		}
+
+		Post post = ps.findById(postId);
+		if (post == null) {
+			return "redirect:/dashboard";
+		}
+
+		Order order = new Order();
+		order.setPostOrder(post);
+		order.setCategory(post.getCategory().name());
+		order.setDescription(post.getDescription());
+		order.setPrice(post.getPrice());
+
+		model.addAttribute("order", order);
+		model.addAttribute("post", post);
+		return "newOrder.jsp";
+	}
+
 }
-
-
-
-
-
-
-
-

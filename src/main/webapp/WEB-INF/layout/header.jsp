@@ -29,22 +29,22 @@
 						<!-- Dropdown menu -->
 						<div id="dropdownNavbar" class="hidden static md:absolute z-10 font-normal bg-white rounded-lg shadow w-full md:w-40 dark:bg-neutral-700 mt-2">
 						    <ul class="py-2 text-sm text-neutral-800 dark:text-stone-100">
-						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
 						            <a href="/servicios/mudanzas" class="block">Mudanzas</a>
 						        </li>
-						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
 						            <a href="/servicios/jardineria" class="block">Jardinería</a>
 						        </li>
-						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
 						            <a href="/servicios/electricistas" class="block">Electricistas</a>
 						        </li>
-						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
 						            <a href="/servicios/pintores" class="block">Pintores</a>
 						        </li>
-						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
 						            <a href="/servicios/reparaciones" class="block">Reparaciones</a>
 						        </li>
-						        <li class="rounded-md px-4 py-2 hover:bg-orange-700">
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
 						            <a href="/servicios/limpieza" class="block">Limpieza</a>
 						        </li>
 						    </ul>

@@ -26,26 +26,9 @@ public class PostController {
 
 	@Autowired
 	private PostService postService;
-	
+
 	@Autowired
 	private UserService userService;
-
-	@GetMapping("/servicios/{categoria}/{id}")
-	public String publication(@PathVariable("categoria") String categoria, @PathVariable("id") Long id,
-			HttpSession session, Model model) {
-		User userTemp = (User) session.getAttribute("userInSession");
-		if (userTemp == null) {
-			return "redirect:/iniciar-sesion";
-		}
-		Post post = postService.findById(id);
-		Integer averageRating = postService.calculateAverageRatingByPost(post);
-		ModelUtils.setupModel(userTemp, model, post.getTitle(), "/private/publicacion.jsp");
-		model.addAttribute("post", post);
-		model.addAttribute("categoria", categoria);
-		model.addAttribute("rating", "Puntuacion" + averageRating);
-
-		return "index.jsp";
-	}
 
 	@GetMapping("/nueva-publicacion")
 	public String createPost(HttpSession session, Model model, @ModelAttribute("post") Post post) {
@@ -54,10 +37,10 @@ public class PostController {
 			return "redirect:/iniciar-sesion";
 		}
 		User user = userService.findById(userTemp.getId());
-		if(!user.isSupplier()) { // si no es supplier no puede crear publicaciones
+		if (!user.isSupplier()) { // si no es supplier no puede crear publicaciones
 			return "redirect:/";
 		}
-		
+
 		model.addAttribute("categoryValues", Category.values());
 		model.addAttribute("subCategoryValues", SubCategory.values());
 
@@ -74,7 +57,7 @@ public class PostController {
 			return "redirect:/iniciar-sesion";
 		}
 		User user = userService.findById(userTemp.getId());
-		
+
 		if (result.hasErrors() || postService.isDuplicateTitle(post.getTitle())) {
 			model.addAttribute("categoryValues", Category.values());
 			model.addAttribute("subCategoryValues", SubCategory.values());
@@ -105,35 +88,35 @@ public class PostController {
 	public String update(@PathVariable Long id, @ModelAttribute("post") Post post, BindingResult result, Model model) {
 		Post existingPost = postService.findById(id);
 		if (existingPost != null) {
-	        if (postService.isDuplicateTitle(post.getTitle())) {
-	            result.rejectValue("title", "Duplicate", "El título ya existe.");
-	            model.addAttribute("categoryValues", Category.values());
-	            model.addAttribute("subCategoryValues", SubCategory.values());
-	            model.addAttribute("post", post);
-	            return "posts/form"; // Volver al formulario si hay errores
-	        }
+			if (postService.isDuplicateTitle(post.getTitle())) {
+				result.rejectValue("title", "Duplicate", "El título ya existe.");
+				model.addAttribute("categoryValues", Category.values());
+				model.addAttribute("subCategoryValues", SubCategory.values());
+				model.addAttribute("post", post);
+				return "posts/form"; // Volver al formulario si hay errores
+			}
 
-	        if (result.hasErrors()) {
-	            model.addAttribute("categoryValues", Category.values());
-	            model.addAttribute("subCategoryValues", SubCategory.values());
-	            model.addAttribute("post", post);
-	            return "posts/form"; // Volver al formulario si hay errores
-	        } else {
-	            post.setId(id);
-	            Post updatedPost = postService.save(post);
-	            if (updatedPost != null) {
-	                return "redirect:/posts"; // Redirigir a la lista de posts después de actualizar
-	            } else {
-	                model.addAttribute("categoryValues", Category.values());
-	                model.addAttribute("subCategoryValues", SubCategory.values());
-	                model.addAttribute("post", post);
-	                model.addAttribute("errors", result.getAllErrors());
-	                return "posts/form"; // Volver al formulario si hay errores
-	            }
-	        }
-	    } else {
-	        return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
-	    }
+			if (result.hasErrors()) {
+				model.addAttribute("categoryValues", Category.values());
+				model.addAttribute("subCategoryValues", SubCategory.values());
+				model.addAttribute("post", post);
+				return "posts/form"; // Volver al formulario si hay errores
+			} else {
+				post.setId(id);
+				Post updatedPost = postService.save(post);
+				if (updatedPost != null) {
+					return "redirect:/posts"; // Redirigir a la lista de posts después de actualizar
+				} else {
+					model.addAttribute("categoryValues", Category.values());
+					model.addAttribute("subCategoryValues", SubCategory.values());
+					model.addAttribute("post", post);
+					model.addAttribute("errors", result.getAllErrors());
+					return "posts/form"; // Volver al formulario si hay errores
+				}
+			}
+		} else {
+			return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
+		}
 	}
 
 	@DeleteMapping("/{id}")
