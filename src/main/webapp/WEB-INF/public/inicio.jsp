@@ -9,7 +9,7 @@
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
 			<a href="/servicios/jardineria">
-				<img src="<c:url value='/images/home/Jardineria.png'/>" alt="Jardinería" />
+				<img src="<c:url value='/images/home/Jardineros.png'/>" alt="Jardinería" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">

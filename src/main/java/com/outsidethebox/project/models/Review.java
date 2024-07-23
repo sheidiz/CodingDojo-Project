@@ -27,19 +27,12 @@ public class Review {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_id")
+	@JoinColumn(name = "post_id", nullable = false)
 	private Post post;
 
-	/*
-	 * Provisorio para no romperle nada a Facu
-	 * 
-	 * @ManyToOne(fetch = FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name = "user_id") private User client;
-	 */
-	
-	@NotNull
-	private String client;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id", nullable = false)
+	private User client;
 
 	@NotNull
 	@Size(min = 2, max = 200, message = "El contenido debe tener un mínimo de 2 caracteres")
@@ -49,10 +42,10 @@ public class Review {
 	private int rating;
 
 	@Column(updatable = false)
-	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 
-	@DateTimeFormat(pattern = "YYYY-MM-DD")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 
 	public Review() {
@@ -81,14 +74,6 @@ public class Review {
 
 	public void setRating(int rating) {
 		this.rating = rating;
-	}
-
-	public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
 	}
 
 	public Date getCreatedAt() {

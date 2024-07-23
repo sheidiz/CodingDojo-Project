@@ -22,48 +22,52 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotEmpty(message="Coloque su nombre completo")
-	@Size(min=8, message="El nombre completo debe contener al menos 8 caracteres.")
+
+	@NotEmpty(message = "Coloque su nombre completo")
+	@Size(min = 8, message = "El nombre completo debe contener al menos 8 caracteres.")
 	private String fullName;
-	
+
 	private String phoneNumber;
-	
-	@NotEmpty(message="Coloque su Email")
-	@Email(message="email invalido")
+
+	@NotEmpty(message = "Coloque su Email")
+	@Email(message = "email invalido")
 	private String email;
-	
-	@NotEmpty(message="Coloque su contraseña")
-	@Size(min=6, message="La contraseña necesita al menos 6 caracteres.")
+
+	@NotEmpty(message = "Coloque su contraseña")
+	@Size(min = 6, message = "La contraseña necesita al menos 6 caracteres.")
 	private String password;
-	
+
 	@NotNull
-	private boolean supplier;
-	
+	private boolean isSupplier;
+
 	@Transient
-	@NotEmpty(message="Coloque su contraseña otra vez")
-	@Size(min=6, message="La contraseña necesita al menos 6 caracteres.")
+	@NotEmpty(message = "Coloque su contraseña otra vez")
+	@Size(min = 6, message = "La contraseña necesita al menos 6 caracteres.")
 	private String confirm;
 
-	@OneToMany(mappedBy="supplier", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
 	private List<Post> supplierPost;
-	
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Order> clientOrders;
-	
-	@Column(updatable=false)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Order> clientOrders;
+
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Review> clienReviews;
+
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
-	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-	
-	public User () {}
+
+	public User() {
+	}
 
 	public Long getId() {
 		return id;
@@ -130,11 +134,19 @@ public class User {
 	}
 
 	public boolean isSupplier() {
-		return supplier;
+		return isSupplier;
 	}
 
-	public void setSupplier(boolean supplier) {
-		this.supplier = supplier;
+	public void setSupplier(boolean isSupplier) {
+		this.isSupplier = isSupplier;
+	}
+
+	public List<Review> getClienReviews() {
+		return clienReviews;
+	}
+
+	public void setClienReviews(List<Review> clienReviews) {
+		this.clienReviews = clienReviews;
 	}
 
 	public List<Post> getSupplierPost() {
@@ -157,7 +169,7 @@ public class User {
 	protected void onCreate() {
 		this.createdAt = new Date();
 	}
-	
+
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
