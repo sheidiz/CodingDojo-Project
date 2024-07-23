@@ -20,6 +20,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -32,25 +34,25 @@ public class Post {
 	private Long id;
 
 	private boolean isHighlighted = false;
-	
-	@NotNull
-    private boolean statusPost = true;
 
 	@NotNull
-	@Size(min = 2, max = 100, message = "El título debe tener un mínimo de 2 caracteres")
+	private boolean statusPost = true;
+
+	@NotNull
+	@Size(min = 2, max = 100, message = "Añade un título a tu servicio")
 	private String title;
 
 	@NotNull
-	@Size(min = 2, max = 200, message = "El contenido debe tener un mínimo de 2 caracteres")
+	@Size(min = 2, max = 200, message = "¡No olvides añadir una descripción!")
 	private String description;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Category category;
 
-	@NotNull
-	@Size(message = "Debe agregar un precio")
-	private double price;
+	@NotNull(message = "Añade un estimado del valor de tu servicio")
+	@Min(value = 0, message = "| El precio debe ser mayor o igual a 0")
+	private Double price;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -133,11 +135,19 @@ public class Post {
 		this.category = category;
 	}
 
-	public double getPrice() {
+	public boolean isStatusPost() {
+		return statusPost;
+	}
+
+	public void setStatusPost(boolean statusPost) {
+		this.statusPost = statusPost;
+	}
+
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 

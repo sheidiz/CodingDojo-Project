@@ -32,6 +32,7 @@ public class User {
 	@Size(min = 8, message = "El nombre completo debe contener al menos 8 caracteres.")
 	private String fullName;
 
+	@NotEmpty(message = "Coloque su número de teléfono")
 	private String phoneNumber;
 
 	@NotEmpty(message = "Coloque su Email")
@@ -163,6 +164,12 @@ public class User {
 
 	public void setClientOrders(List<Order> clientOrders) {
 		this.clientOrders = clientOrders;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", email=" + email
+				+ ", password=" + password + ", isSupplier=" + isSupplier + "]";
 	}
 
 	@PrePersist

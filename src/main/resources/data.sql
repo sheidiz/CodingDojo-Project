@@ -1,9 +1,9 @@
--- Usuarios
+-- Usuarios  Todas las pass son 123456 por propositos de testing
 INSERT INTO users (full_name, email, phone_number, password, is_supplier, created_at, updated_at)
 VALUES 
-('Juan Electronica', 'juan.perez@example.com', '1234567890', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 1, '2024-01-01', '2024-01-01'), --pass 123456
+('Juan Electronica', 'juan.perez@example.com', '1234567890', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 1, '2024-01-01', '2024-01-01'),
 ('María López', 'maria.lopez@example.com', '0987654321', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 0, '2024-01-01', '2024-01-01'),
-('Carlos Plomero', 'carlos.garcia@example.com', '', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 1, '2024-01-01', '2024-01-01'),
+('Carlos Plomero', 'carlos.garcia@example.com', '1244567890', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 1, '2024-01-01', '2024-01-01'),
 ('Ana Torres', 'ana.torres@example.com', '3456789012', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 0, '2024-01-01', '2024-01-01'),
 ('Luis Martínez Carpintero', 'luis.martinez@example.com', '4567890123', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 1, '2024-01-01', '2024-01-01'),
 ('Elena Gómez', 'elena.gomez@example.com', '5678901234', '$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO', 0, '2024-01-01', '2024-01-01'),

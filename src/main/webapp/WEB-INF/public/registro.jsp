@@ -37,7 +37,7 @@
             <form:errors path="fullName" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
-            <form:label path="phoneNumber" >Teléfono (opcional)</form:label>
+            <form:label path="phoneNumber" >Teléfono</form:label>
             <form:input path="phoneNumber" type="tel" id="phone" placeholder="011 1111 1111" class="my-1 w-full rounded-full border px-2 py-1" />
             <form:errors path="phoneNumber" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>

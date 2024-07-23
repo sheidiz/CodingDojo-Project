@@ -1,97 +1,144 @@
 package com.outsidethebox.project.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.outsidethebox.project.models.Post;
 import com.outsidethebox.project.models.Category;
+import com.outsidethebox.project.models.Post;
+import com.outsidethebox.project.models.SubCategory;
+import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.services.PostService;
+import com.outsidethebox.project.services.UserService;
+import com.outsidethebox.project.utils.ModelUtils;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/posts")
 public class PostController {
 
-    @Autowired
-    private PostService postService;
+	@Autowired
+	private PostService postService;
+	
+	@Autowired
+	private UserService userService;
 
-    @GetMapping
-    public String findAll(Model model) {
-        List<Post> posts = postService.findAll();
-        model.addAttribute("posts", posts);
-        return "posts/list"; // Nombre de la vista que mostrará la lista de posts
-    }
+	@GetMapping("/servicios/{categoria}/{id}")
+	public String publication(@PathVariable("categoria") String categoria, @PathVariable("id") Long id,
+			HttpSession session, Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+		Post post = postService.findById(id);
+		Integer averageRating = postService.calculateAverageRatingByPost(post);
+		ModelUtils.setupModel(userTemp, model, post.getTitle(), "/private/publicacion.jsp");
+		model.addAttribute("post", post);
+		model.addAttribute("categoria", categoria);
+		model.addAttribute("rating", "Puntuacion" + averageRating);
 
-    @GetMapping("/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        Post post = postService.findById(id);
-        if (post != null) {
-            model.addAttribute("post", post);
-            return "posts/detail"; // Nombre de la vista que mostrará el detalle del post
-        } else {
-            return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
-        }
-    }
+		return "index.jsp";
+	}
 
-    @GetMapping("/category/{category}")
-    public String findByCategory(@PathVariable Category category, Model model) {
-        List<Post> posts = postService.findByCategory(category);
-        model.addAttribute("posts", posts);
-        return "posts/list"; // Utiliza la misma vista de lista de posts
-    }
+	@GetMapping("/nueva-publicacion")
+	public String createPost(HttpSession session, Model model, @ModelAttribute("post") Post post) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+		User user = userService.findById(userTemp.getId());
+		if(!user.isSupplier()) { // si no es supplier no puede crear publicaciones
+			return "redirect:/";
+		}
+		
+		model.addAttribute("categoryValues", Category.values());
+		model.addAttribute("subCategoryValues", SubCategory.values());
 
-    @GetMapping("/new")
-    public String createForm(Model model) {
-        model.addAttribute("post", new Post());
-        return "posts/form"; // Nombre de la vista del formulario de creación
-    }
+		ModelUtils.setupModel(user, model, "Crear publicación", "/private/crearpost.jsp");
 
-    @PostMapping
-    public String save(@ModelAttribute("post") Post post, BindingResult result, Model model) {
-        Post savedPost = postService.save(post, result);
-        if (savedPost != null) {
-            return "redirect:/posts"; // Redirigir a la lista de posts después de guardar
-        } else {
-            model.addAttribute("errors", result.getAllErrors());
-            return "posts/form"; // Volver al formulario si hay errores
-        }
-    }
+		return "index.jsp";
+	}
 
-    @GetMapping("/{id}/edit")
-    public String updateForm(@PathVariable Long id, Model model) {
-        Post post = postService.findById(id);
-        if (post != null) {
-            model.addAttribute("post", post);
-            return "posts/form"; // Nombre de la vista del formulario de edición
-        } else {
-            return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
-        }
-    }
+	@PostMapping("/publicacion/create")
+	public String save(@Valid @ModelAttribute("post") Post post, BindingResult result, Model model,
+			HttpSession session) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) { // sin sesion no puede ingresar
+			return "redirect:/iniciar-sesion";
+		}
+		User user = userService.findById(userTemp.getId());
+		
+		if (result.hasErrors() || postService.isDuplicateTitle(post.getTitle())) {
+			model.addAttribute("categoryValues", Category.values());
+			model.addAttribute("subCategoryValues", SubCategory.values());
+			if (postService.isDuplicateTitle(post.getTitle())) {
+				result.rejectValue("title", "Duplicate", "El título ya existe.");
+			}
+			ModelUtils.setupModel(user, model, "Crear publicación", "/private/crearpost.jsp");
+			return "index.jsp";
+		}
+		post.setSupplier(user);
+		postService.save(post);
+		return "redirect:/";
 
-    @PostMapping("/{id}")
-    public String update(@PathVariable Long id, @ModelAttribute("post") Post post, BindingResult result, Model model) {
-        Post existingPost = postService.findById(id);
-        if (existingPost != null) {
-            post.setId(id);
-            Post updatedPost = postService.save(post, result);
-            if (updatedPost != null) {
-                return "redirect:/posts"; // Redirigir a la lista de posts después de actualizar
-            } else {
-                model.addAttribute("errors", result.getAllErrors());
-                return "posts/form"; // Volver al formulario si hay errores
-            }
-        } else {
-            return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
-        }
-    }
+	}
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        postService.deleteById(id);
-        return "redirect:/posts"; // Redirigir a la lista de posts después de eliminar
-    }
+	@GetMapping("/{id}/edit")
+	public String updateForm(@PathVariable Long id, Model model) {
+		Post post = postService.findById(id);
+		if (post != null) {
+			model.addAttribute("post", post);
+			return "posts/form"; // Nombre de la vista del formulario de edición
+		} else {
+			return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
+		}
+	}
+
+	@PostMapping("/{id}")
+	public String update(@PathVariable Long id, @ModelAttribute("post") Post post, BindingResult result, Model model) {
+		Post existingPost = postService.findById(id);
+		if (existingPost != null) {
+	        if (postService.isDuplicateTitle(post.getTitle())) {
+	            result.rejectValue("title", "Duplicate", "El título ya existe.");
+	            model.addAttribute("categoryValues", Category.values());
+	            model.addAttribute("subCategoryValues", SubCategory.values());
+	            model.addAttribute("post", post);
+	            return "posts/form"; // Volver al formulario si hay errores
+	        }
+
+	        if (result.hasErrors()) {
+	            model.addAttribute("categoryValues", Category.values());
+	            model.addAttribute("subCategoryValues", SubCategory.values());
+	            model.addAttribute("post", post);
+	            return "posts/form"; // Volver al formulario si hay errores
+	        } else {
+	            post.setId(id);
+	            Post updatedPost = postService.save(post);
+	            if (updatedPost != null) {
+	                return "redirect:/posts"; // Redirigir a la lista de posts después de actualizar
+	            } else {
+	                model.addAttribute("categoryValues", Category.values());
+	                model.addAttribute("subCategoryValues", SubCategory.values());
+	                model.addAttribute("post", post);
+	                model.addAttribute("errors", result.getAllErrors());
+	                return "posts/form"; // Volver al formulario si hay errores
+	            }
+	        }
+	    } else {
+	        return "redirect:/posts"; // Redirigir a la lista de posts si no se encuentra el post
+	    }
+	}
+
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable Long id) {
+		postService.deleteById(id);
+		return "redirect:/posts"; // Redirigir a la lista de posts después de eliminar
+	}
 }

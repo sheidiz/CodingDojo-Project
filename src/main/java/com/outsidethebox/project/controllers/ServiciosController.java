@@ -181,24 +181,8 @@ public class ServiciosController {
 		return "index.jsp";
 	}
 
-	// Additional methods from the second part
-	@GetMapping("/servicios/{categoria}/{id}")
-	public String publication(@PathVariable("categoria") String categoria, @PathVariable("id") Long id,
-			HttpSession session, Model model) {
-		User userTemp = (User) session.getAttribute("userInSession");
-		if (userTemp == null) {
-			return "redirect:/iniciar-sesion";
-		}
-		Post post = postService.findById(id);
-		Integer averageRating = postService.calculateAverageRatingByPost(post);
-		ModelUtils.setupModel(userTemp, model, post.getTitle(), "/private/publicacion.jsp");
-		model.addAttribute("post", post);
-		model.addAttribute("categoria", categoria);
-		model.addAttribute("rating", "Puntuacion" + averageRating);
 
-		return "index.jsp";
-	}
-
+	
 	@GetMapping("/ordenes/id")
 	public String review(HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");

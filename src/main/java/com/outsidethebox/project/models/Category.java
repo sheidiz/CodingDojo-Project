@@ -9,6 +9,6 @@ public enum Category {
     Carpintero,
     Jardinero,
     Fletero,
-    Mudanzas,
+    Limpieza,
     Otro
 }
