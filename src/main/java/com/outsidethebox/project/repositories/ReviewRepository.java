@@ -15,8 +15,8 @@ public interface ReviewRepository extends CrudRepository<Review, Long> {
 	List<Review> findByPostId(Long postId);
 
 	List<Review> findByClientId(Long clientId);
-	
-	 @Query("SELECT AVG(r.rating) FROM Review r WHERE r.post.id = :postId")
-	 Double findAverageRatingByPostId(@Param("postId") Long postId);
+
+	@Query("SELECT AVG(r.rating) FROM Review r WHERE r.post.id = :postId")
+	Double findAverageRatingByPostId(@Param("postId") Long postId);
 
 }

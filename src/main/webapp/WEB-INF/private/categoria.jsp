@@ -15,7 +15,7 @@
 		<h1 class="font-phrase text-3xl text-neutral-800 dark:text-stone-50">Los mejores en ${pageTitle}</h1>
 		<div class="grid grid-cols-1 gap-8 py-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
 			<c:forEach items="${posts}" var="post">
-				<div class="single-review flex flex-1 flex-col justify-between gap-2 rounded-md border bg-white p-4 shadow-lg dark:shadow-white/10">
+				<div class="single-review min-w-80 flex flex-1 flex-col justify-between gap-2 rounded-md border bg-white p-4 shadow-lg dark:shadow-white/10">
 					<div class="flex flex-col gap-2">
 
 						<h3 class="text-2xl font-semibold text-orange-700 pb-2 border-b">${post.supplier.fullName}</h3>

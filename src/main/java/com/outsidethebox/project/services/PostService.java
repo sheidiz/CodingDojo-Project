@@ -27,9 +27,13 @@ public class PostService {
 	public Post findById(Long id) {
 		return postRepository.findById(id).orElse(null);
 	}
-
+	
 	public List<Post> findByCategory(Category category) {
 		return postRepository.findByCategory(category);
+	}
+	
+	public List<Post> findByCategorySortByCreationDate(Category category) {
+		return postRepository.findByCategoryOrderByCreatedAtDesc(category);
 	}
 	
 	public boolean isDuplicateTitle(String title) {

@@ -26,7 +26,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
     public List<Order> getOrdersBySupplierAndStatus(User supplier, String statusOrder) {
-        return orderRepository.findByPostOrderSupplierAndStatusOrder(supplier, statusOrder);
+        return orderRepository.findByPostOrderSupplierAndStatusOrderOrderByCreatedAtDesc(supplier, statusOrder);
     }
 }
 

@@ -13,6 +13,6 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 
 	List<Order> findAll();
 
-	List<Order> findByPostOrderSupplierAndStatusOrder(User supplier, String statusOrder);
+	List<Order> findByPostOrderSupplierAndStatusOrderOrderByCreatedAtDesc(User supplier, String statusOrder);
 
 }
