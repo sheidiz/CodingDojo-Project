@@ -28,5 +28,8 @@ public class OrderService {
     public List<Order> getOrdersBySupplierAndStatus(User supplier, String statusOrder) {
         return orderRepository.findByPostOrderSupplierAndStatusOrderOrderByCreatedAtDesc(supplier, statusOrder);
     }
+    public List<Order> getOrdersWithoutReview(Long clientId) {
+        return orderRepository.findOrdersWithoutReviewByClientId(clientId);
+    }
 }
 

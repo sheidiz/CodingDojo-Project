@@ -2,7 +2,9 @@ package com.outsidethebox.project.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.outsidethebox.project.models.Order;
@@ -14,5 +16,8 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 	List<Order> findAll();
 
 	List<Order> findByPostOrderSupplierAndStatusOrderOrderByCreatedAtDesc(User supplier, String statusOrder);
+	
+	@Query("SELECT o FROM Order o WHERE o.client.id = :clientId AND o.id NOT IN (SELECT r.post.id FROM Review r WHERE r.client.id = :clientId)")
+    List<Order> findOrdersWithoutReviewByClientId(@Param("clientId") Long clientId);
 
 }
