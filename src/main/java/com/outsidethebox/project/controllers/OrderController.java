@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.outsidethebox.project.models.Order;
 import com.outsidethebox.project.models.Post;
+import com.outsidethebox.project.models.Review;
 import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.services.OrderService;
 import com.outsidethebox.project.services.PostService;
+import com.outsidethebox.project.services.ReviewService;
 import com.outsidethebox.project.services.UserService;
 import com.outsidethebox.project.utils.ModelUtils;
 
@@ -32,7 +34,10 @@ public class OrderController {
 	@Autowired
 	private UserService us;
 
-	// create order jsp + 
+	@Autowired
+	private ReviewService rs;
+
+	// create order jsp +
 	@GetMapping("/servicios/{categoria}/{id}")
 	public String publication(@PathVariable("categoria") String categoria, @PathVariable("id") Long id,
 			HttpSession session, Model model, @ModelAttribute("order") Order order) {
@@ -99,6 +104,59 @@ public class OrderController {
 		model.addAttribute("order", order);
 		model.addAttribute("post", post);
 		return "newOrder.jsp";
+	}
+
+	@GetMapping("/ordenes/{orderId}")
+	public String orderDetails(@PathVariable("orderId") Long orderId, HttpSession session, Model model,
+			@ModelAttribute("review") Review review) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+
+		Order order = os.findById(orderId);
+		User usuario = order.getClient();
+		
+		if (order == null || usuario.getId() != userTemp.getId()) {
+			return "redirect:/";
+		}
+		
+		
+		model.addAttribute("order", order);
+		model.addAttribute("post", order.getPostOrder());
+
+		ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/review.jsp");
+
+		return "index.jsp";
+	}
+
+	@PostMapping("/ordenes/{orderId}/{orderPostOrderId}")
+	public String enviarReview(@PathVariable("orderId") Long orderId,
+			@PathVariable("orderPostOrderId") Long postOrderId, HttpSession session,
+			@Valid @ModelAttribute("review") Review review, BindingResult result ,Model model) {
+
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+
+		Order order = os.findById(orderId);
+		User usuario = order.getClient();
+		
+		if (order == null || usuario.getId() != userTemp.getId()) {
+			return "redirect:/";
+		}
+
+		model.addAttribute("order", order);
+		model.addAttribute("post", order.getPostOrder());
+		
+		if(result.hasErrors()) {
+			ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/review.jsp");
+			return "index.jsp";
+		}
+		
+		rs.saveReview(review);
+		return "redirect:/";
 	}
 
 }
