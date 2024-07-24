@@ -32,7 +32,7 @@ public class OrderController {
 	@Autowired
 	private UserService us;
 
-	// create order jsp
+	// create order jsp + 
 	@GetMapping("/servicios/{categoria}/{id}")
 	public String publication(@PathVariable("categoria") String categoria, @PathVariable("id") Long id,
 			HttpSession session, Model model, @ModelAttribute("order") Order order) {

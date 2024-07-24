@@ -43,8 +43,8 @@ body {
 	background: url("../images/registro/bg.jpg") center center/cover no-repeat fixed;
 }
 
-.bg-Mudanzas {
-	background-image: url("../images/categorias/Mudanzas.jpg");
+.bg-Fleteros {
+	background-image: url("../images/categorias/Fleteros.jpg");
 }
 
 .bg-Jardineros {
@@ -55,16 +55,24 @@ body {
 	background-image: url("../images/categorias/Electricistas.jpg");
 }
 
-.bg-Pintores {
-	background-image: url("../images/categorias/Pintores.jpg");
+.bg-Gasistas {
+	background-image: url("../images/categorias/Gasistas.jpg");
 }
 
-.bg-Reparaciones {
-	background-image: url("../images/categorias/Reparaciones.jpg");
+.bg-Plomeros {
+	background-image: url("../images/categorias/Plomeros.jpg");
 }
 
-.bg-Limpieza {
-	background-image: url("../images/categorias/Limpieza.jpg");
+.bg-Carpinteros {
+	background-image: url("../images/categorias/Carpinteros.jpg");
+}
+
+.bg-Otros {
+	background-image: url("../images/categorias/Otros.jpg");
+}
+
+.bg-Busqueda {
+	background-image: url("../images/categorias/Busqueda.jpg");
 }
 
 .bg-post {

@@ -18,7 +18,7 @@ public class UserService {
 		String password = newUser.getPassword();
 		String confirm = newUser.getConfirm();
 		if (!password.equals(confirm)) {
-			result.rejectValue("confirm", "Matches", "Las contraseñas no son iguales.");
+			result.rejectValue("confirm", "Matches", "Las contraseñas no coinciden.");
 		}
 		String email = newUser.getEmail();
 		User userExist= ur.findByEmail(email);

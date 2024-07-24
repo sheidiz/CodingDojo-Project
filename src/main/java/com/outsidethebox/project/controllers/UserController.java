@@ -28,7 +28,6 @@ public class UserController {
 		if (userTemp != null) {
 			return "redirect:/";
 		}
-		model.addAttribute("supplier", false);
 		return "public/registro.jsp";
 	}
 	
@@ -38,7 +37,6 @@ public class UserController {
 		if (userTemp != null) {
 			return "redirect:/";
 		}
-		model.addAttribute("supplier", true);
 		return "public/registro_laburante.jsp";
 	}
 	
@@ -46,23 +44,21 @@ public class UserController {
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("newUser") User newUser, 
 	                       BindingResult result, 
-	                       HttpSession session, 
-	                       @ModelAttribute("supplier") boolean supplier, 
+	                       HttpSession session,
 	                       Model model) {
 
+		// Registro del usuario
+	    serv.register(newUser, result);
+	    
 	    // Si hay errores de validación, vuelve a mostrar el formulario adecuado
 	    if (result.hasErrors()) {
-	        if (supplier) {
-	            model.addAttribute("supplier", true);
+	        if (newUser.isSupplier()) {
 	            return "public/registro_laburante.jsp";
 	        } else {
-	            model.addAttribute("supplier", false);
 	            return "public/registro.jsp";
 	        }
 	    }
-
-	    // Registro del usuario
-	    serv.register(newUser, result);
+	    
 	    session.setAttribute("userInSession", newUser);
 	    return "redirect:/";
 	}

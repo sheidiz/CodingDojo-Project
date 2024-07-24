@@ -1,5 +1,6 @@
 package com.outsidethebox.project.services;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,22 +28,44 @@ public class PostService {
 	public Post findById(Long id) {
 		return postRepository.findById(id).orElse(null);
 	}
-	
+
+	public List<Post> findByTitleOrDescriptionContaining(String search) {
+		return postRepository.findByTitleOrDescriptionContaining(search);
+	}
+
 	public List<Post> findByCategory(Category category) {
 		return postRepository.findByCategory(category);
 	}
-	
+
 	public List<Post> findByCategorySortByCreationDate(Category category) {
 		return postRepository.findByCategoryOrderByCreatedAtDesc(category);
 	}
-	
+
+	public List<Post> findByCategoryAndSearchTerm(Category category, String searchTerm) {
+		return postRepository.findByCategoryAndTitleOrDescriptionContainingIgnoreCase(category, searchTerm);
+	}
+
+	public List<Post> findPostsExcludingSpecificCategories() {
+		List<Category> excludedCategories = Arrays.asList(Category.Fletero, Category.Jardinero, Category.Electricista,
+				Category.Gasista, Category.Plomero, Category.Carpintero);
+
+		return postRepository.findPostsExcludingCategories(excludedCategories);
+	}
+
+	public List<Post> findPostsExcludingCategoriesAndSearch(String search) {
+		List<Category> excludedCategories = Arrays.asList(Category.Fletero, Category.Jardinero, Category.Electricista,
+				Category.Gasista, Category.Plomero, Category.Carpintero);
+
+		return postRepository.findPostsExcludingCategoriesAndSearch(excludedCategories, search);
+	}
+
 	public boolean isDuplicateTitle(String title) {
-        List<Post> existingPosts = postRepository.findByTitle(title);
-        return !existingPosts.isEmpty();
-    }
+		List<Post> existingPosts = postRepository.findByTitle(title);
+		return !existingPosts.isEmpty();
+	}
 
 	public Post save(Post post) {
-		 return postRepository.save(post);
+		return postRepository.save(post);
 	}
 
 	public void deleteById(Long id) {
