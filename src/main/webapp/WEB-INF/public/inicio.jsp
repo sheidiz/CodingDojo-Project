@@ -1,40 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <main class="bg-stone-50 py-5 dark:bg-neutral-800">
 	<ul class="mx-auto flex max-w-screen-lg flex-wrap justify-center gap-4 lg:gap-10">
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
-			<a href="/servicios/mudanzas">
-				<img src="<c:url value='/images/home/Mudanzas.png'/>" alt="Mudanzas" />
+			<a href="/servicios/Fleteros">
+				<img src="<c:url value='/images/home/Fleteros.png'/>" alt="Fleteros" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
-			<a href="/servicios/jardineria">
-				<img src="<c:url value='/images/home/Jardineros.png'/>" alt="Jardinería" />
+			<a href="/servicios/Jardineros">
+				<img src="<c:url value='/images/home/Jardineros.png'/>" alt="JardinerÃ­a" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
-			<a href="/servicios/electricistas">
-				<img src="<c:url value='/images/home/Electricistas.png'/>" alt="Electricista" />
+			<a href="/servicios/Electricistas">
+				<img src="<c:url value='/images/home/Electricistas.png'/>" alt="Electricistas" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
-			<a href="/servicios/pintores">
-				<img src="<c:url value='/images/home/Pintores.png'/>" alt="Pintor" />
+			<a href="/servicios/Gasistas">
+				<img src="<c:url value='/images/home/Gasista.png'/>" alt="Gasistas" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
-			<a href="/servicios/reparaciones">
-				<img src="<c:url value='/images/home/Reparaciones.png'/>" alt="Reparaciones" />
+			<a href="/servicios/Plomeros">
+				<img src="<c:url value='/images/home/Plomero.png'/>" alt="Plomeros" />
 			</a>
 		</li>
 		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
-			<a href="/servicios/limpieza">
-				<img src="<c:url value='/images/home/Limpieza.png'/>" alt="Limpieza" />
+			<a href="/servicios/Carpinteros">
+				<img src="<c:url value='/images/home/Carpinteros.png'/>" alt="Carpinteros" />
+			</a>
+		</li>
+		<li class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:size-20 md:p-2 hover:scale-110">
+			<a href="/servicios/Otros">
+				<img src="<c:url value='/images/home/Otro.png'/>" alt="Otros" />
 			</a>
 		</li>
 	</ul>
-	<form action="/servicios" class="my-2 flex w-full py-4">
-		<input type="text" placeholder="¡Encontrá lo que buscás acá!" id="search" name="search"
+	<form action="/servicios/Busqueda" class="my-2 flex w-full py-4">
+		<input type="text" placeholder="Â¡EncontrÃ¡ lo que buscÃ¡s acÃ¡!" id="search" name="search"
 			class="mx-auto w-4/5 rounded-3xl bg-white px-6 py-2 text-center outline-none focus:outline-neutral-700 md:w-96 md:py-3 dark:bg-neutral-700 dark:text-white shadow-lg" />
 	</form>
 	
@@ -71,13 +76,13 @@
 	</div>
 
 	<div id="reviews" class="mx-3 my-20 max-w-5xl rounded-2xl bg-white p-10 shadow-lg md:mx-auto dark:bg-neutral-700">
-	  <h3 class="pb-3 md:pb-5 font-semibold text-lg dark:text-white">Reseñas más recientes</h3>
+	  <h3 class="pb-3 md:pb-5 font-semibold text-lg dark:text-white">ReseÃ±as mÃ¡s recientes</h3>
 	  <div class="my-2 flex flex-col justify-center gap-6 md:flex-row">
 	    <div class="single-review flex flex-1 flex-col justify-between gap-2 rounded-md border bg-white p-4">
 	      <div class="flex flex-col gap-2">
 	        <img src="<c:url value='/images/home/Puntuacion5.png'/>" alt="Puntuacion 5" class="h-5 w-fit" />
-	        <p class="font-semibold">Electricista Pablo M.: Arreglo de último momento</p>
-	        <p class="text-sm font-medium">Agradezco haberme topado con un profesional como Pablo, con rápidez soluciono todas mis inquietudes.</p>
+	        <p class="font-semibold">Electricista Pablo M.: Arreglo de Ãºltimo momento</p>
+	        <p class="text-sm font-medium">Agradezco haberme topado con un profesional como Pablo, con rÃ¡pidez soluciono todas mis inquietudes.</p>
 	      </div>
 	      <div>
 	        <p class="text-sm font-medium text-neutral-700">Tamara Gimenez</p>
@@ -98,7 +103,7 @@
 	    <div class="single-review flex flex-1 flex-col justify-between gap-2 rounded-md border bg-white p-4">
 	      <div class="flex flex-col gap-2">
 	        <img src="<c:url value='/images/home/Puntuacion4.png'/>" alt="Puntuacion 4" class="h-5 w-fit" />
-	        <p class="font-semibold">CleanNow Nuñez: Limpieza del hogar</p>
+	        <p class="font-semibold">CleanNow NuÃ±ez: Limpieza del hogar</p>
 	        <p class="text-sm font-medium">Excelente servicio de limpieza, eficiente y amigable.</p>
 	      </div>
 	      <div>

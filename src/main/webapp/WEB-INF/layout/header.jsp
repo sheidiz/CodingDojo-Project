@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header>
 	<nav id="myNav" class="relative bg-stone-50 dark:bg-neutral-800 shadow">
@@ -30,22 +30,25 @@
 						<div id="dropdownNavbar" class="hidden static md:absolute z-10 font-normal bg-white rounded-lg shadow w-full md:w-40 dark:bg-neutral-700 mt-2">
 						    <ul class="py-2 text-sm text-neutral-800 dark:text-stone-100">
 						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
-						            <a href="/servicios/mudanzas" class="block">Mudanzas</a>
+						            <a href="/servicios/Fleteros" class="block">Fleteros</a>
 						        </li>
 						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
-						            <a href="/servicios/jardineria" class="block">Jardiner韆</a>
+						            <a href="/servicios/Jardineros" class="block">Jardineros</a>
 						        </li>
 						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
-						            <a href="/servicios/electricistas" class="block">Electricistas</a>
+						            <a href="/servicios/Electricistas" class="block">Electricistas</a>
 						        </li>
 						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
-						            <a href="/servicios/pintores" class="block">Pintores</a>
+						            <a href="/servicios/Gasistas" class="block">Gasistas</a>
 						        </li>
 						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
-						            <a href="/servicios/reparaciones" class="block">Reparaciones</a>
+						            <a href="/servicios/Plomeros" class="block">Plomeros</a>
 						        </li>
 						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
-						            <a href="/servicios/limpieza" class="block">Limpieza</a>
+						            <a href="/servicios/Carpinteros" class="block">Carpinteros</a>
+						        </li>
+						        <li class="rounded-md px-4 py-2 hover:bg-orange-700 hover:text-slate-50">
+						            <a href="/servicios/Otros" class="block">Otros</a>
 						        </li>
 						    </ul>
 						</div>
@@ -63,15 +66,15 @@
 								<a href="/perfil" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Mi Perfil</a>
 							</li>
 							<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hidden md:hover:bg-transparent">
-								<a href="/logout" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Cerrar sesi髇</a>
+								<a href="/logout" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Cerrar sesi贸n</a>
 							</li>
 						</c:when>
 						<c:otherwise>
 							<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hidden md:hover:bg-transparent">
-								<a href="/iniciar-sesion" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Iniciar sesi髇</a>
+								<a href="/iniciar-sesion" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">Iniciar sesi贸n</a>
 							</li>
 							<li class="rounded-md px-4 py-2 hover:bg-orange-700 md:hidden md:hover:bg-transparent">
-								<a href="/registro" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">趎ete</a>
+								<a href="/registro" class="menu-link block text-neutral-800 dark:text-stone-100 hover:text-stone-50 md:hover:text-orange-700 md:dark:hover:text-orange-500">脷nete</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -81,11 +84,11 @@
 				<c:choose>
 					<c:when test="${not empty userInSession}">
 						<a href="/perfil" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Mi Perfil</a>
-						<a href="/logout" class="rounded-full bg-neutral-700 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">Cerrar sesi髇</a>
+						<a href="/logout" class="rounded-full bg-neutral-700 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">Cerrar sesi贸n</a>
 					</c:when>
 					<c:otherwise>
-						<a href="/iniciar-sesion" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Iniciar sesi髇</a>
-						<a href="/registro" class="rounded-full bg-neutral-800 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">趎ete</a>
+						<a href="/iniciar-sesion" class="me-1 rounded-full bg-orange-800 px-4 py-2 font-medium text-stone-50 duration-200 hover:bg-orange-700">Iniciar sesi贸n</a>
+						<a href="/registro" class="rounded-full bg-neutral-800 px-4 py-2 font-medium text-stone-50 dark:bg-stone-200 dark:hover:bg-stone-50 dark:text-orange-800">脷nete</a>
 					</c:otherwise>
 				</c:choose>
 			</div>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
@@ -24,11 +23,11 @@
     <a href="/" class="font-logo w-fit rounded-full bg-orange-800 px-8 pt-2 text-5xl font-semibold -tracking-widest text-slate-50 shadow-xl md:text-6xl">CheLaburo</a>
     <p class="text-center text-2xl font-medium md:mx-auto md:w-3/4 dark:text-slate-50">
       Registrate <br />
-      ¡y comenza a conectar con tus clientes!
+      Â¡y comenza a conectar con tus clientes!
     </p>
     <div class="w-full items-center justify-center gap-5 rounded-xl bg-orange-800 p-4 md:flex dark:bg-transparent">
       <div class="w-full">
-        <p class="pb-2 text-center text-2xl font-medium text-slate-50 md:pb-5 md:text-4xl">¡Bienvenido/a!</p>
+        <p class="pb-2 text-center text-2xl font-medium text-slate-50 md:pb-5 md:text-4xl">Â¡Bienvenido/a!</p>
         <form:form action="/register" method="POST" modelAttribute="newUser" class="my-2 flex flex-col gap-y-2 rounded-md bg-slate-50 px-6 py-6 dark:bg-orange-800">
 		<input type="hidden" name="supplier" value="true" />
           <div>
@@ -37,7 +36,7 @@
             <form:errors path="fullName" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
-            <form:label path="phoneNumber" >Teléfono</form:label>
+            <form:label path="phoneNumber" >TelÃ©fono</form:label>
             <form:input path="phoneNumber" type="tel" id="phone" placeholder="011 1111 1111" class="my-1 w-full rounded-full border px-2 py-1" />
             <form:errors path="phoneNumber" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
@@ -47,18 +46,18 @@
             <form:errors path="email" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
-            <form:label path="password" >Contraseña</form:label>
+            <form:label path="password" >ContraseÃ±a</form:label>
             <form:input path="password" type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
             <form:errors path="password" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <div>
-            <form:label path="confirm" >Repetir contraseña</form:label>
+            <form:label path="confirm" >Repetir contraseÃ±a</form:label>
             <form:input path="confirm" type="password" id="password" placeholder="*******" class="my-1 w-full rounded-full border px-2 py-1" />
             <form:errors path="confirm" class="mt-1 block w-fit rounded bg-white px-2 text-sm font-semibold text-red-700"/>
           </div>
           <input type="submit" value="Registrarme" class="cursor-pointer my-1 rounded-full bg-zinc-900 py-1 text-slate-300 hover:text-slate-50" />
-          <p class="mt-1 text-sm dark:text-stone-50">¿Ya tenés una cuenta? <a class="font-semibold underline" href="/iniciar-sesion">Inicia sesión</a></p>
-          <p class="mt-1 text-sm dark:text-stone-50"> ¿Quieres registrarte como usuario? <a class="font-semibold underline" href="/registro">Haz click aquí</a></p>          
+          <p class="mt-1 text-sm dark:text-stone-50">Â¿Ya tenÃ©s una cuenta? <a class="font-semibold underline" href="/iniciar-sesion">Inicia sesiÃ³n</a></p>
+          <p class="mt-1 text-sm dark:text-stone-50"> Â¿Quieres registrarte como usuario? <a class="font-semibold underline" href="/registro">Haz click aquÃ­</a></p>          
         </form:form >
       </div>
       <div class="hidden w-full md:block">

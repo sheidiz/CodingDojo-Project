@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <main class="min-h-screen justify-center bg-review bg-center bg-cover p-3 md:p-4">
   <section class="mx-auto mt-20 h-fit max-w-3xl rounded-xl bg-slate-50 p-6 dark:bg-neutral-800">
@@ -11,8 +11,8 @@
     </p>
     <p class="font-phrase font-light text-neutral-800 md:text-lg dark:text-stone-50">Quia enim ullam et neque necessitatibus. Error suscipit deserunt ab. Nam nam non totam quia. Nulla neque quis laudantium. Aspernatur aliquid est vero eaque assumenda consequatur. Quas reprehenderit cupiditate temporibus. Et dicta deserunt possimus. Quis occaecati aperiam possimus delectus cupiditate id sint.</p>
     <form class="mt-4 flex flex-col items-start gap-y-2">
-      <h2 class="text-3xl font-semibold text-neutral-800 dark:text-stone-50">Dejar una reseña</h2>
-      <label class="mb-[-15px] align-middle text-lg font-medium text-white">Puntuación:</label>
+      <h2 class="text-3xl font-semibold text-neutral-800 dark:text-stone-50">Dejar una reseÃ±a</h2>
+      <label class="mb-[-15px] align-middle text-lg font-medium text-white">PuntuaciÃ³n:</label>
       <div class="rating">
         <input value="5" name="rating" id="star5" type="radio" />
         <label for="star5"></label>

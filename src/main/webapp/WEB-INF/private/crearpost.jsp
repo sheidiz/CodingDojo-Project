@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -8,38 +8,38 @@
 		<form:form action="/publicacion/create" method="post" modelAttribute="post" class="flex w-full max-w-lg flex-col gap-y-4 md:rounded-lg bg-white bg-opacity-80 p-8 shadow-lg dark:bg-gray-800 dark:bg-opacity-90">
 			<div class="mb-4 text-center">
 				<h1 class="text-4xl font-bold text-orange-700 dark:text-orange-700">CheLaburo</h1>
-				<p class="text-lg font-semibold dark:text-white">¡Creá una publicación y comenzá a ofrecer tus servicios!</p>
+				<p class="text-lg font-semibold dark:text-white">Â¡CreÃ¡ una publicaciÃ³n y comenzÃ¡ a ofrecer tus servicios!</p>
 			</div>
 			<%--  <div>
-        <label for="ubicacion" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Ubicación</label>
+        <label for="ubicacion" class="block text-sm font-medium text-gray-700 dark:text-gray-300">UbicaciÃ³n</label>
         <form:input path="ubicacion" id="ubicacion" name="ubicacion" placeholder="Palermo, Buenos Aires" class="mt-1 block w-full rounded-full p-2 drop-shadow-md focus:border-orange-800 focus:ring-orange-800 dark:bg-gray-700 dark:text-white dark:focus:border-orange-500 dark:focus:ring-orange-500"/>
         <form:errors path="ubicacion" cssClass="text-red-500" />
-        <small class="text-gray-500 dark:text-gray-400">¡No olvides agregar la zona en la que trabajas!</small>
+        <small class="text-gray-500 dark:text-gray-400">Â¡No olvides agregar la zona en la que trabajas!</small>
       </div> --%>
 			<form:hidden path="supplier" value="${userInSession.id}" />
 			<div>
-				<label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Titulo</label>
-				<form:input path="title" id="title" name="title" placeholder="Añade el título de tu servicio."
+				<label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">TÃ­tulo</label>
+				<form:input path="title" id="title" name="title" placeholder="AÃ±ade el tÃ­tulo de tu servicio."
 					class="mt-1 block w-full rounded-full p-2 drop-shadow-md focus:border-orange-800 focus:ring-orange-800 dark:bg-gray-700 dark:text-white dark:focus:border-orange-500 dark:focus:ring-orange-500" />
 				<form:errors path="title" class="text-sm text-gray-500 dark:text-gray-400" />
 			</div>
 			<div>
-				<label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Categoría</label>
+				<label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">CategorÃ­a</label>
 				<form:select path="category" id="category" name="category"
 					class="mt-1 block w-full rounded-full p-2 drop-shadow-md focus:border-orange-800 focus:ring-orange-800 dark:bg-gray-700 dark:text-white dark:focus:border-orange-500 dark:focus:ring-orange-500">
 					<form:options items="${categoryValues}" />
 				</form:select>
 			</div>
 			<div>
-				<label for="subCategory" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subcategoría</label>
+				<label for="subCategory" class="block text-sm font-medium text-gray-700 dark:text-gray-300">SubcategorÃ­a</label>
 				<form:select path="subCategory" id="subCategory" name="subCategoria"
 					class="mt-1 block w-full rounded-full p-2 drop-shadow-md focus:border-orange-800 focus:ring-orange-800 dark:bg-gray-700 dark:text-white dark:focus:border-orange-500 dark:focus:ring-orange-500">
 					<form:options items="${subCategoryValues}" />
 				</form:select>
 			</div>
 			<div class="mb-4">
-				<label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
-				<form:textarea path="description" id="description" name="description" placeholder="Añade una descripción de tus servicios."
+				<label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">DescripciÃ³n</label>
+				<form:textarea path="description" id="description" name="description" placeholder="AÃ±ade una descripciÃ³n de tus servicios."
 					class="mt-1 block w-full rounded-lg p-2 drop-shadow-md focus:border-orange-800 focus:ring-orange-800 dark:bg-gray-700 dark:text-white dark:focus:border-orange-500 dark:focus:ring-orange-500"></form:textarea>
 				<form:errors path="description" class="text-sm text-gray-500 dark:text-gray-400" />
 			</div>
@@ -53,7 +53,7 @@
 			<div class="text-center">
 				<button type="submit"
 					class="w-fit rounded-full bg-orange-800 px-4 py-2 font-bold text-white shadow drop-shadow-md hover:bg-orange-800 focus:outline-none focus:ring-2 focus:ring-orange-800 focus:ring-opacity-50">Crear
-					Publicación</button>
+					PublicaciÃ³n</button>
 			</div>
 		</form:form>
 	</div>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <main class="bg-perfil bg-cover bg-center">
 	<!-- Profile Section -->
@@ -17,7 +17,7 @@
 		<div class="mx-auto w-full rounded-xl bg-white p-6 shadow-md">
 			<!-- Orders Section -->
 			<div class="mb-8">
-				<h3 class="mb-4 text-xl font-bold">Órdenes Pendientes:</h3>
+				<h3 class="mb-2 text-xl font-bold">Ã“rdenes Pendientes:</h3>
 				<c:choose>
 					<c:when test="${not empty pendingOrders}">
 						<c:forEach items="${pendingOrders}" var="po">
@@ -25,15 +25,15 @@
 								<div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${po.category}.png'/>" alt="${po.category}" />
 								</div>
-								<a class="text-gray-800" href="/">¡${po.client.fullName} solicitó tus servicios!</a>
+								<a class="text-gray-800" href="/">Â¡${po.client.fullName} solicitÃ³ tus servicios!</a>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p>Por el momento no se hay ordenes pendientes.</p>
+						<p class="mb-4">Por el momento no se hay ordenes pendientes.</p>
 					</c:otherwise>
 				</c:choose>
-				<h3 class="mb-4 text-xl font-bold">Órdenes Concretadas:</h3>
+				<h3 class="mb-2 text-xl font-bold">Ã“rdenes Concretadas:</h3>
 				<c:choose>
 					<c:when test="${not empty completedOrders}">
 						<c:forEach items="${completedOrders}" var="co">
@@ -41,19 +41,19 @@
 								<div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${co.category}.png'/>" alt="${co.category}" />
 								</div>
-								<p class="text-gray-800">¡Realizaste un trabajo para ${co.client.fullName}!</p>
+								<p class="text-gray-800">Â¡Realizaste un trabajo para ${co.client.fullName}!</p>
 								<img src="https://placehold.co/20x20" alt="Check Icon" class="ml-auto h-6 w-6" />
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p>Por el momento no se concretaron ordenes.</p>
+						<p class="mb-4">Por el momento no se concretaron ordenes.</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<!-- Publications Section -->
 			<div>
-				<h3 class="mb-4 text-xl font-bold">Tus Publicaciones:</h3>
+				<h3 class="mb-2 text-xl font-bold">Tus Publicaciones:</h3>
 				<c:choose>
 					<c:when test="${not empty posts}">
 						<c:forEach items="${posts}" var="post">
@@ -66,7 +66,7 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p>Todavía no hay publicaciones creadas.</p>
+						<p class="mb-4">TodavÃ­a no hay publicaciones creadas.</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
