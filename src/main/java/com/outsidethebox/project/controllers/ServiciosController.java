@@ -133,16 +133,4 @@ public class ServiciosController {
 
 		return "index.jsp";
 	}
-
-	@GetMapping("/ordenes/id")
-	public String review(HttpSession session, Model model) {
-		User userTemp = (User) session.getAttribute("userInSession");
-		if (userTemp == null) {
-			return "redirect:/iniciar-sesion";
-		}
-
-		ModelUtils.setupModel(userTemp, model, "Orden - Mudanzas - Flete Carlitos", "/private/review.jsp");
-
-		return "index.jsp";
-	}
 }
