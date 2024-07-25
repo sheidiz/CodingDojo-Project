@@ -5,6 +5,9 @@
 	<div class="mx-auto flex min-h-[80vh] max-w-screen-2xl flex-col items-start gap-y-4 p-8 md:flex-row md:gap-x-12">
 		<div class="mx-auto w-full rounded-xl p-6 shadow-md   dark:bg-neutral-700 bg-white dark:text-white">
 			<div class="mb-6 text-center">
+				<div class="mx-auto my-4 size-28 rounded-full bg-slate-100 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2 overflow-hidden">
+					<img src="<c:url value='${userInSession.profilePicture}'/>" alt="Fleteros" />
+				</div>
 				<h2 class="pb-5 text-4xl font-bold">${userInSession.fullName}</h2>
 				<p class="m-2 text-gray-700 dark:text-white">${userInSession.phoneNumber}</p>
 			</div>
