@@ -33,8 +33,8 @@
 										alt="${po.category}" />
 								</div>
 								<div>
-									<a class="text-gray-800 block" href="/">¡Solicitaste los
-										servicios de ${po.postOrder.supplier.fullName}!</a>
+									<p class="text-gray-800 block">¡Solicitaste los
+										servicios de ${po.postOrder.supplier.fullName}!</p>
 									<p class="text-gray-800 text-sm">${po.postOrder.title}</p>
 								</div>
 							</div>
@@ -56,7 +56,7 @@
 										alt="${co.category}" />
 								</div>
 								<div>
-									<a class="text-gray-800 block" href="/">¡Solicitaste los
+									<a class="text-gray-800 block" href="/ordenes/${co.id}">¡Solicitaste los
 										servicios de ${co.postOrder.supplier.fullName}!</a>
 									<p class="text-gray-800 text-sm">${co.postOrder.title}</p>
 								</div>
