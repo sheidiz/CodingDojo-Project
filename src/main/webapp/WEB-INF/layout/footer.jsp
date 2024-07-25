@@ -32,13 +32,10 @@
             <span class="block text-sm font-semibold mb-4">Descubrí</span>
             <ul class="list-unstyled">
               <li>
-                <a class="block pb-2 text-sm" href="/servicios">Servicios</a>
+                <a class="block pb-2 text-sm" href="/">Servicios</a>
               </li>
               <li>
-                <a class="block pb-2 text-sm" href="/registro-supplier">Brindar servicios</a>
-              </li>
-              <li>
-                <a class="block pb-2 text-sm" href="/servicios">Lo más popular</a>
+                <a class="block pb-2 text-sm" href="/registro_laburante">Brindar servicios</a>
               </li>
               <li>
                 <a class="block pb-2 text-sm" href="/ayuda">Ayuda</a>
