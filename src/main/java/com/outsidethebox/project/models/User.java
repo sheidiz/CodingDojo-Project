@@ -43,6 +43,8 @@ public class User {
 	@Size(min = 6, message = "La contraseña necesita al menos 6 caracteres.")
 	private String password;
 
+	private String profilePicture;
+
 	@NotNull
 	private boolean isSupplier;
 
@@ -108,6 +110,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	public String getConfirm() {

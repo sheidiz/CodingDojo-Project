@@ -7,8 +7,7 @@
 			<img src="<c:url value='/images/iconos/${category}.png'/>" alt="${category}" />
 		</div>
 		<form action="/servicios/${category}" method="get" class="my-4 flex w-full py-4">
-			<input type="text" placeholder="¡Encontrá lo que buscás acá!" id="search" name="search" value="${search}"
-				class="mx-auto w-4/5 rounded-3xl bg-white px-6 py-2 text-center shadow-lg outline-none focus:outline-neutral-700 md:w-96 md:py-3 dark:bg-neutral-700 dark:text-white" />
+			<input type="text" placeholder="¡Encontrá lo que buscás acá!" id="search" name="search" value="${search}" class="mx-auto w-4/5 rounded-3xl bg-white px-6 py-2 text-center shadow-lg outline-none focus:outline-neutral-700 md:w-96 md:py-3 dark:bg-neutral-700 dark:text-white" />
 		</form>
 	</section>
 	<section class="max-w-6xl mx-4 my-10 flex flex-col items-center gap-2 lg:mx-auto">
@@ -20,7 +19,12 @@
 					<c:forEach items="${posts}" var="post">
 						<div class="single-review min-w-80 flex flex-1 flex-col justify-between gap-2 rounded-md border bg-white p-4 shadow-lg dark:shadow-white/10">
 							<div class="flex flex-col gap-2">
-								<h3 class="text-2xl font-semibold text-orange-700 pb-2 border-b">${post.supplier.fullName}</h3>
+								<div class="flex items-center gap-x-4 pb-2 border-b">
+									<div class="size-10 rounded-full bg-slate-100 p-1 drop-shadow-[0_2px_2px_rgba(0,0,0,0.25)] overflow-hidden">
+										<img src="<c:url value='${post.supplier.profilePicture}'/>" alt="Fleteros" />
+									</div>
+									<h3 class="text-2xl font-semibold text-orange-700">${post.supplier.fullName}</h3>
+								</div>
 								<p class="text-lg font-medium">${post.title}</p>
 								<p class="text-sm font-semibold">Desde $${post.price}-</p>
 								<c:choose>

@@ -1,5 +1,10 @@
 package com.outsidethebox.project.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.outsidethebox.project.models.User;
@@ -22,6 +28,8 @@ public class UserController {
 	@Autowired
 	private UserService serv;
 
+	private static String UPLOADED_FOLDER = "src/main/resources/static/images/users/";
+
 	@GetMapping("/registro")
 	public String signup(Model model, @ModelAttribute("newUser") User newUser, HttpSession session) {
 		User userTemp = (User) session.getAttribute("userInSession");
@@ -30,7 +38,7 @@ public class UserController {
 		}
 		return "public/registro.jsp";
 	}
-	
+
 	@GetMapping("/registro_laburante")
 	public String signupSupplier(Model model, @ModelAttribute("newUser") User newUser, HttpSession session) {
 		User userTemp = (User) session.getAttribute("userInSession");
@@ -39,28 +47,42 @@ public class UserController {
 		}
 		return "public/registro_laburante.jsp";
 	}
-	
-	
+
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute("newUser") User newUser, 
-	                       BindingResult result, 
-	                       HttpSession session,
-	                       Model model) {
+	public String register(@Valid @ModelAttribute("newUser") User newUser, BindingResult result, HttpSession session,
+			Model model, @RequestParam("image") MultipartFile file) {
+
+		// save profile pic
+		if (!file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+				Files.write(path, bytes);
+				
+				newUser.setProfilePicture("/images/users/" + file.getOriginalFilename());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			// default profile pic
+			newUser.setProfilePicture("/images/users/default-profile.png");
+		}
 
 		// Registro del usuario
-	    serv.register(newUser, result);
-	    
-	    // Si hay errores de validación, vuelve a mostrar el formulario adecuado
-	    if (result.hasErrors()) {
-	        if (newUser.isSupplier()) {
-	            return "public/registro_laburante.jsp";
-	        } else {
-	            return "public/registro.jsp";
-	        }
-	    }
-	    
-	    session.setAttribute("userInSession", newUser);
-	    return "redirect:/";
+		serv.register(newUser, result);
+
+		// Si hay errores de validación, vuelve a mostrar el formulario adecuado
+		if (result.hasErrors()) {
+			System.out.println(result.getAllErrors());
+			if (newUser.isSupplier()) {
+				return "public/registro_laburante.jsp";
+			} else {
+				return "public/registro.jsp";
+			}
+		}
+
+		session.setAttribute("userInSession", newUser);
+		return "redirect:/";
 	}
 
 	@GetMapping("/iniciar-sesion")
@@ -82,7 +104,7 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("errorLogin", "Email y/o contraseña incorrectos");
 			return "redirect:/iniciar-sesion";
 		}
-		
+
 		session.setAttribute("userInSession", userTryingLogin);
 		return "redirect:/";
 	}
