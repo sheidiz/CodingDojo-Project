@@ -6,10 +6,10 @@
 	<!-- Profile Section -->
 	<div
 		class="mx-auto flex min-h-[80vh] max-w-screen-2xl flex-col items-start gap-y-4 p-8 md:flex-row md:gap-x-12">
-		<div class="mx-auto w-full rounded-xl p-6 shadow-md bg-white">
+		<div class="mx-auto w-full rounded-xl p-6 shadow-md bg-white dark:bg-neutral-700 dark:text-white">
 			<div class="mb-6 text-center">
 				<h2 class="pb-5 text-4xl font-bold">${userInSession.fullName}</h2>
-				<p class="m-2 text-gray-700">${userInSession.phoneNumber}</p>
+				<p class="m-2 text-gray-700 dark:text-white">${userInSession.phoneNumber}</p>
 			</div>
 			<div class="flex flex-col items-center">
 				<a href="/"
@@ -18,80 +18,80 @@
 			</div>
 		</div>
 		<!-- Orders and Publications Section -->
-		<div class="mx-auto w-full rounded-xl bg-white p-6 shadow-md">
+		<div class="mx-auto w-full rounded-xl bg-white dark:bg-neutral-700 p-6 shadow-md">
 			<!-- Orders Section -->
 			<div class="mb-8">
-				<h3 class="mb-2 text-xl font-bold">Órdenes Pendientes:</h3>
+				<h3 class="mb-2 text-xl font-bold dark:text-white">Órdenes Pendientes:</h3>
 				<c:choose>
 					<c:when test="${not empty pendingOrders}">
 						<c:forEach items="${pendingOrders}" var="po">
 							<div
-								class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md">
+								class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md  dark:bg-neutral-600">
 								<div
 									class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${po.category}s.png'/>"
 										alt="${po.category}" />
 								</div>
-								<div>
-									<p class="text-gray-800 block">¡Solicitaste los
+								<div class="text-gray-800 dark:text-white">
+									<p class="font-semibold">¡Solicitaste los
 										servicios de ${po.postOrder.supplier.fullName}!</p>
-									<p class="text-gray-800 text-sm">${po.postOrder.title}</p>
+									<p class="text-sm">${po.postOrder.title}</p>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p class="mb-4">Por el momento no se hay ordenes pendientes.</p>
+						<p class="mb-4 dark:text-white">Por el momento no se hay ordenes pendientes.</p>
 					</c:otherwise>
 				</c:choose>
-				<h3 class="mb-2 text-xl font-bold">Órdenes Concretadas:</h3>
+				<h3 class="mb-2 text-xl font-bold dark:text-white">Órdenes Concretadas:</h3>
 				<c:choose>
 					<c:when test="${not empty completedOrders}">
 						<c:forEach items="${completedOrders}" var="co">
 							<div
-								class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md">
+								class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md  dark:bg-neutral-600">
 								<div
 									class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${co.category}s.png'/>"
 										alt="${co.category}" />
 								</div>
-								<div>
-									<a class="text-gray-800 block" href="/ordenes/${co.id}">¡Solicitaste los
+								<div class="text-gray-800 dark:text-white">
+									<a class="font-semibold" href="/ordenes/${co.id}">¡Solicitaste los
 										servicios de ${co.postOrder.supplier.fullName}!</a>
-									<p class="text-gray-800 text-sm">${co.postOrder.title}</p>
+									<p class="text-sm">${co.postOrder.title}</p>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p class="mb-4">Por el momento no se concretaron ordenes.</p>
+						<p class="mb-4 dark:text-white">Por el momento no se concretaron ordenes.</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<!-- Publications Section -->
 			<div>
-				<h3 class="mb-2 text-xl font-bold">Tus Reseñas:</h3>
+				<h3 class="mb-2 text-xl font-bold dark:text-white">Tus Reseñas:</h3>
 				<c:choose>
 					<c:when test="${not empty reviews}">
 						<c:forEach items="${reviews}" var="review">
 							<div
-								class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md">
+								class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md  dark:bg-neutral-600">
 								<div
 									class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img
 										src="<c:url value='/images/iconos/${review.post.category}s.png'/>"
 										alt="${review.post.category}" />
 								</div>
-								<div>
-									<p class="text-gray-800">${review.post.title}</p>
-									<p class="text-gray-800 text-sm">${review.comentary}</p>
-									<p class="text-gray-800 text-xs"> <fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd" /></p>
+								<div class="text-gray-800 dark:text-white">
+									<p class="font-semibold">${review.post.title}</p>
+									<p class="text-sm">${review.comentary}</p>
+									<p class="text-xs"> <fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd" /></p>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<p class="mb-4">Todavía no hay reseñas creadas.</p>
+						<p class="mb-4 dark:text-white">Todavía no hay reseñas creadas.</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
