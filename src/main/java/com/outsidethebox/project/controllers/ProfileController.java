@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.outsidethebox.project.models.Order;
 import com.outsidethebox.project.models.Post;
+import com.outsidethebox.project.models.Review;
 import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.services.OrderService;
 import com.outsidethebox.project.services.UserService;
@@ -45,7 +46,18 @@ public class ProfileController {
 			model.addAttribute("completedOrders", completedOrders);
 			model.addAttribute("posts", sortedPosts);
 		} else {
-			return "redirect:/";
+			ModelUtils.setupModel(user, model, "Mi Perfil", "/private/perfil-usuario-privado.jsp");
+			List<Order> pendingOrders = os.getOrdersByClientAndStatus(user.getId(), "0").stream()
+					.sorted((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt())).collect(Collectors.toList());
+			List<Order> completedOrders = os.getOrdersByClientAndStatus(user.getId(), "1").stream()
+					.sorted((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt())).collect(Collectors.toList());
+			List<Review> reviews= user.getClienReviews().stream()
+					.sorted((p1, p2) -> p2.getCreatedAt().compareTo(p1.getCreatedAt())).collect(Collectors.toList());
+			model.addAttribute("pendingOrders", pendingOrders);
+			model.addAttribute("completedOrders", completedOrders);
+			model.addAttribute("reviews",reviews);
+			
+			
 		}
 		return "index.jsp";
 	}

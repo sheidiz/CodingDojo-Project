@@ -19,5 +19,8 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 	
 	@Query("SELECT o FROM Order o WHERE o.client.id = :clientId AND o.id NOT IN (SELECT r.post.id FROM Review r WHERE r.client.id = :clientId)")
     List<Order> findOrdersWithoutReviewByClientId(@Param("clientId") Long clientId);
+	
+	@Query("SELECT o FROM Order o WHERE o.client.id = :clientId AND o.statusOrder = :statusOrder ORDER BY o.createdAt DESC")
+    List<Order> findOrdersByClientAndStatusOrder(@Param("clientId") Long clientId, @Param("statusOrder") String statusOrder);
 
 }

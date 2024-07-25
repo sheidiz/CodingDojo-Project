@@ -31,5 +31,8 @@ public class OrderService {
     public List<Order> getOrdersWithoutReview(Long clientId) {
         return orderRepository.findOrdersWithoutReviewByClientId(clientId);
     }
+    public List<Order> getOrdersByClientAndStatus(Long clientId, String statusOrder) {
+        return orderRepository.findOrdersByClientAndStatusOrder(clientId, statusOrder);
+    }
 }
 
