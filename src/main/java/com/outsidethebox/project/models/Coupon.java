@@ -16,6 +16,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -33,19 +34,19 @@ public class Coupon {
 	@NotEmpty
 	private String description;
 
-	@NotEmpty
+	@NotNull(message = "El descuento no puede estar vacío")
 	private Long discount;
 
-	@NotEmpty
+	@NotNull(message = "El límite del cupón no puede estar vacío")
 	private Double couponLimit;
 
-	@NotEmpty
+	@NotNull(message = "La fecha de expiración no puede estar vacía")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date expiration;
 
-	@OneToMany(mappedBy="couponOrder", cascade=CascadeType.ALL)
-	private List<Order> ordersCoupon; //Relacion con Order
-	
+	@OneToMany(mappedBy = "couponOrder", cascade = CascadeType.ALL)
+	private List<Order> ordersCoupon; // Relacion con Order
+
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -55,6 +56,14 @@ public class Coupon {
 	private Date updatedAt;
 
 	public Coupon() {
+	}
+
+	public Coupon(String name, String description, Long discount, Double couponLimit, Date expiration) {
+		this.name = name;
+		this.description = description;
+		this.discount = discount;
+		this.couponLimit = couponLimit;
+		this.expiration = expiration;
 	}
 
 	public Long getId() {
@@ -120,7 +129,7 @@ public class Coupon {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
 	public List<Order> getOrdersCoupon() {
 		return ordersCoupon;
 	}

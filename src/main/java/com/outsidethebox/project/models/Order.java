@@ -1,11 +1,14 @@
 package com.outsidethebox.project.models;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +30,8 @@ public class Order {
 	private Long id;
 
 	@NotNull
-	private String category;
+	@Enumerated(EnumType.STRING)
+	private Category category;
 
 	@NotNull
 	private String statusOrder;
@@ -37,7 +41,7 @@ public class Order {
 	private String description;
 
 	@NotNull
-	private double price;
+	private Double price;
 
 	@Future(message = "La fecha debe ser posterior a la fecha actual.")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -66,6 +70,31 @@ public class Order {
 	public Order() {
 	}
 
+	public Order(Post postOrder, User client, Category category, String description, double price, String statusOrder,
+			Date estimatedDate, Date createdAt) {
+		this.postOrder = postOrder;
+		this.client = client;
+		this.category = category;
+		this.description = description;
+		this.price = price;
+		this.statusOrder = statusOrder;
+		this.estimatedDate = estimatedDate;
+		this.createdAt = createdAt;
+	}
+
+	public Order(Post postOrder, User client, Category category, String description, double price, String statusOrder,
+			Date estimatedDate, Coupon couponOrder, Date createdAt) {
+		this.postOrder = postOrder;
+		this.client = client;
+		this.category = category;
+		this.description = description;
+		this.price = price;
+		this.statusOrder = statusOrder;
+		this.estimatedDate = estimatedDate;
+		this.couponOrder = couponOrder;
+		this.createdAt = createdAt;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -74,11 +103,11 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

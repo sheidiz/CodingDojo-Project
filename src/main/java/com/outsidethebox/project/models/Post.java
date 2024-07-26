@@ -87,12 +87,29 @@ public class Post {
 		this.subCategory = subCategory;
 	}
 
-	public Post(User supplier, String title, String description, Category category, SubCategory subCategory) {
+	public Post(User supplier, Category category, SubCategory subCategory, String title, String description,
+			boolean statusPost, Double price, boolean isHighlighted) {
 		this.title = title;
 		this.supplier = supplier;
 		this.description = description;
 		this.category = category;
 		this.subCategory = subCategory;
+		this.statusPost = statusPost;
+		this.price = price;
+		this.isHighlighted = isHighlighted;
+	}
+
+	public Post(User supplier, Category category, SubCategory subCategory, String title, String description,
+			boolean statusPost, Double price, boolean isHighlighted, Date createdAt) {
+		this.title = title;
+		this.supplier = supplier;
+		this.description = description;
+		this.category = category;
+		this.subCategory = subCategory;
+		this.statusPost = statusPost;
+		this.price = price;
+		this.isHighlighted = isHighlighted;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {

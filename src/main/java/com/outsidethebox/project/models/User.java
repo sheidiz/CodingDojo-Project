@@ -72,6 +72,18 @@ public class User {
 	public User() {
 	}
 
+	public User(String fullName, String email, String phoneNumber, String password, String profilePicture,
+			boolean isSupplier, Date createdAt) {
+		this.fullName = fullName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.confirm = password;
+		this.profilePicture = profilePicture;
+		this.isSupplier = isSupplier;
+		this.createdAt = createdAt;
+	}
+
 	public Long getId() {
 		return id;
 	}

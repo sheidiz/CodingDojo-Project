@@ -52,6 +52,14 @@ public class Review {
 
 	}
 
+	public Review(Post post, User client, int rating, String comentary, Date createdAt) {
+		this.post = post;
+		this.client = client;
+		this.rating = rating;
+		this.comentary = comentary;
+		this.createdAt = createdAt;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -91,7 +99,7 @@ public class Review {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
 	public Post getPost() {
 		return post;
 	}

@@ -82,30 +82,6 @@ public class OrderController {
 
 	}
 
-	// see order jsp
-	@GetMapping("/order/{postId}")
-	public String order(@PathVariable("postId") Long postId, HttpSession session, Model model) {
-		User userTemp = (User) session.getAttribute("userInSession");
-		if (userTemp == null) {
-			return "redirect:/";
-		}
-
-		Post post = ps.findById(postId);
-		if (post == null) {
-			return "redirect:/dashboard";
-		}
-
-		Order order = new Order();
-		order.setPostOrder(post);
-		order.setCategory(post.getCategory().name());
-		order.setDescription(post.getDescription());
-		order.setPrice(post.getPrice());
-
-		model.addAttribute("order", order);
-		model.addAttribute("post", post);
-		return "newOrder.jsp";
-	}
-
 	@GetMapping("/ordenes/{orderId}")
 	public String orderDetails(@PathVariable("orderId") Long orderId, HttpSession session, Model model,
 			@ModelAttribute("review") Review review) {
