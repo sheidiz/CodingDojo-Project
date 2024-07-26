@@ -128,47 +128,24 @@ public class PostController {
 		postService.deleteById(id);
 		return "redirect:/posts"; // Redirigir a la lista de posts después de eliminar
 	}
-	
+
 	@GetMapping("/publicaciones/{postId}")
-	public String supplierPost(@PathVariable("postId") Long postId,
-							   HttpSession session, 
-							   Model model) {
+	public String supplierPost(@PathVariable("postId") Long postId, HttpSession session, Model model) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
 		}
-		
+
 		User user = userService.findById(userTemp.getId());
 		Post post = postService.findById(postId);
 		List<Order> orders = post.getOrdersPost();
 		Integer averageRating = postService.calculateAverageRatingByPost(post);
 		ModelUtils.setupModel(user, model, post.getTitle(), "/private/publicacion-supplier.jsp");
-		
+
 		model.addAttribute("post", post);
 		model.addAttribute("orders", orders);
 		model.addAttribute("rating", "Puntuacion" + averageRating);
-		
+
 		return "index.jsp";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

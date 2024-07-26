@@ -40,7 +40,7 @@
 									</c:when>
 									<c:when test="${ not empty postRatings[post.id]}">
 										<img src="<c:url value='/images/home/Puntuacion${postRatings[post.id]}.png'/>" alt="Puntuacion ${postRatings[post.id]}" class="h-5 w-fit" />
-										<a href="/" class="text-sm text-neutral-700 underline">Ver reseñas (${fn:length(post.reviews)})</a>
+										<a href="/publicaciones/${post.id}" class="text-sm text-neutral-700 underline">Ver reseñas (${fn:length(post.reviews)})</a>
 									</c:when>
 								</c:choose>
 								<p class="text-sm font-normal">${post.description}</p>
