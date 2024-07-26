@@ -41,7 +41,7 @@ public class Order {
 	private String description;
 
 	@NotNull
-	private Double price;
+	private double price;
 
 	@Future(message = "La fecha debe ser posterior a la fecha actual.")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -127,14 +127,6 @@ public class Order {
 		this.description = description;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	public Date getEstimatedDate() {
 		return estimatedDate;
 	}
@@ -145,6 +137,14 @@ public class Order {
 
 	public Post getPostOrder() {
 		return postOrder;
+	}
+	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public double getPrice() {
+		return price;
 	}
 
 	public void setPostOrder(Post postOrder) {

@@ -103,24 +103,24 @@ public class DataInitializationConfig implements CommandLineRunner {
 			couponRepository.saveAll(coupons);
 			
 			List<Order> orders = List.of(
-				    new Order(postRepository.findById(1L).get(), userRepository.findById(2L).get(), Category.Electricista, "Arreglo de TV", 999.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(2L).get(), userRepository.findById(2L).get(), Category.Gasista, "Arreglo de sistemas de gas natural", 29.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(3L).get(), userRepository.findById(2L).get(), Category.Plomero, "Reparación de tuberías", 199.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(4L).get(), userRepository.findById(2L).get(), Category.Carpintero, "Fabricación de muebles", 499.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(5L).get(), userRepository.findById(2L).get(), Category.Jardinero, "Mantenimiento de jardines", 299.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(6L).get(), userRepository.findById(2L).get(), Category.Electricista, "Reparación de lavadoras", 399.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(7L).get(), userRepository.findById(4L).get(), Category.Carpintero, "Construcción de casas", 999.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(8L).get(), userRepository.findById(4L).get(), Category.Gasista, "Instalación de sistemas de gas", 299.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(9L).get(), userRepository.findById(4L).get(), Category.Jardinero, "Mantenimiento de áreas verdes", 199.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(10L).get(), userRepository.findById(4L).get(), Category.Carpintero, "Restauración de muebles", 299.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(11L).get(), userRepository.findById(4L).get(), Category.Electricista, "Instalación eléctrica", 199.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(12L).get(), userRepository.findById(4L).get(), Category.Electricista, "Reparación de aire acondicionado", 599.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(13L).get(), userRepository.findById(4L).get(), Category.Jardinero, "Diseño de jardines", 499.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(14L).get(), userRepository.findById(4L).get(), Category.Carpintero, "Talla de madera", 399.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(15L).get(), userRepository.findById(6L).get(), Category.Plomero, "Instalación de sanitarios", 299.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(16L).get(), userRepository.findById(6L).get(), Category.Electricista, "Reparación de televisores", 199.99, "1", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(17L).get(), userRepository.findById(6L).get(), Category.Jardinero, "Cuidado de plantas", 99.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01")),
-				    new Order(postRepository.findById(18L).get(), userRepository.findById(6L).get(), Category.Carpintero, "Reparación de tejados", 499.99, "0", dateFormat.parse("2024-09-01"), dateFormat.parse("2023-12-01"))
+				    new Order(postRepository.findById(1L).get(), userRepository.findById(2L).get(), Category.Electricista, "Arreglo de TV", 999.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(2L).get(), userRepository.findById(2L).get(), Category.Gasista, "Arreglo de sistemas de gas natural", 29.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(3L).get(), userRepository.findById(2L).get(), Category.Plomero, "Reparación de tuberías", 199.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(4L).get(), userRepository.findById(2L).get(), Category.Carpintero, "Fabricación de muebles", 499.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(5L).get(), userRepository.findById(2L).get(), Category.Jardinero, "Mantenimiento de jardines", 299.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(6L).get(), userRepository.findById(2L).get(), Category.Electricista, "Reparación de lavadoras", 399.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(7L).get(), userRepository.findById(4L).get(), Category.Carpintero, "Construcción de casas", 999.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(8L).get(), userRepository.findById(4L).get(), Category.Gasista, "Instalación de sistemas de gas", 299.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(9L).get(), userRepository.findById(4L).get(), Category.Jardinero, "Mantenimiento de áreas verdes", 199.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(10L).get(), userRepository.findById(4L).get(), Category.Carpintero, "Restauración de muebles", 299.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(11L).get(), userRepository.findById(4L).get(), Category.Electricista, "Instalación eléctrica", 199.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(12L).get(), userRepository.findById(4L).get(), Category.Electricista, "Reparación de aire acondicionado", 599.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(13L).get(), userRepository.findById(4L).get(), Category.Jardinero, "Diseño de jardines", 499.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(14L).get(), userRepository.findById(4L).get(), Category.Carpintero, "Talla de madera", 399.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(15L).get(), userRepository.findById(6L).get(), Category.Plomero, "Instalación de sanitarios", 299.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(16L).get(), userRepository.findById(6L).get(), Category.Electricista, "Reparación de televisores", 199.99, "1", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(17L).get(), userRepository.findById(6L).get(), Category.Jardinero, "Cuidado de plantas", 99.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26")),
+				    new Order(postRepository.findById(18L).get(), userRepository.findById(6L).get(), Category.Carpintero, "Reparación de tejados", 499.99, "0", dateFormat.parse("2024-07-27"), dateFormat.parse("2024-07-26"))
 			);
 	        orderRepository.saveAll(orders);
 	        

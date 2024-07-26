@@ -34,5 +34,18 @@ public class OrderService {
     public List<Order> getOrdersByClientAndStatus(Long clientId, String statusOrder) {
         return orderRepository.findOrdersByClientAndStatusOrder(clientId, statusOrder);
     }
-}
+    
+    public void completeOrder(Long orderId) {
+        Order order = findById(orderId);
+        if (order != null) {
+            order.setStatusOrder("1");  // Asegúrate de que el estado "1" signifique "Completada" en tu sistema
+            orderRepository.save(order);
+            System.out.println("Order status updated to completed for orderId: " + orderId);
+        } else {
+            System.out.println("Order not found for orderId: " + orderId);
+        }
+    }
+}    
+    
+    
 
