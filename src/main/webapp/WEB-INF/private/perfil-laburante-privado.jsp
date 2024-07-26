@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <main class="bg-perfil bg-cover bg-center">
     <!-- Profile Section -->
@@ -26,18 +27,23 @@
                 <c:choose>
                     <c:when test="${not empty pendingOrders}">
                         <c:forEach items="${pendingOrders}" var="po">
-                            <div class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
-                                    <img src="<c:url value='/images/iconos/${po.category}s.png'/>" alt="${po.category}" />
+                            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                                <div class="flex-shrink-0 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+                                    <img src="<c:url value='/images/iconos/${po.category}s.png'/>" alt="${po.category}" class="w-12 h-12" />
                                 </div>
-                                <a class="text-gray-800 dark:text-white" href="/">¡${po.client.fullName} solicitó tus servicios!</a>
-                                <form action="/completeOrder" method="post">
-                                    <input type="hidden" name="orderId" value="${po.id}" />
-                                    <button type="submit"
-                                        class="ml-4 rounded-3xl bg-gray-200 hover:bg-green-300 p-3">
-                                        <i class="fas fa-check" style="color: green; font-size: 24px;"></i>
-                                    </button>
-                                </form>
+                                <div class="flex-grow flex items-center justify-between">
+                                	<div class="flex-col">
+	                                    <a class="text-gray-800 dark:text-white" href="/">¡${po.client.fullName} solicitó tus servicios!</a>
+	                                    <p class="text-gray-800 dark:text-white text-sm"><fmt:formatDate value="${po.estimatedDate}" pattern="dd-MM-yyyy"/></p>
+	                                </div>
+                                    <form action="/completeOrder" method="post">
+                                        <input type="hidden" name="orderId" value="${po.id}" />
+                                        <button type="submit"
+                                            class="ml-4 rounded-3xl bg-gray-200 hover:bg-green-300 p-3">
+                                            <i class="fas fa-check" style="color: green; font-size: 24px;"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </c:forEach>
                     </c:when>
@@ -49,14 +55,20 @@
                 <c:choose>
                     <c:when test="${not empty completedOrders}">
                         <c:forEach items="${completedOrders}" var="co">
-                            <div class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
-                                    <img src="<c:url value='/images/iconos/${co.category}s.png'/>" alt="${co.category}" />
+                            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                                <div class="flex-shrink-0 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+                                    <img src="<c:url value='/images/iconos/${co.category}s.png'/>" alt="${co.category}" class="w-12 h-12" />
                                 </div>
-                                <p class="text-gray-800 dark:text-white">¡Realizaste un trabajo para ${co.client.fullName}!</p>
-                                <p class="ml-4 rounded-3xl bg-gray-200 p-3">
-                                    <i class="fas fa-check" style="color: green; font-size: 24px;"></i>
-                                </p>
+                                <div class="flex-grow flex items-center justify-between">
+                                    <div class="flex-col">
+										<p class="text-gray-800 dark:text-white">¡Realizaste un trabajo para ${co.client.fullName}!</p>
+	                                    <p class="text-gray-800 dark:text-white text-sm"><fmt:formatDate value="${co.estimatedDate}" pattern="dd-MM-yyyy"/></p>
+	                                </div>
+                                    
+                                    <p class="ml-4 rounded-3xl bg-gray-200 p-3">
+                                        <i class="fas fa-check" style="color: green; font-size: 24px;"></i>
+                                    </p>
+                                </div>
                             </div>
                         </c:forEach>
                     </c:when>
@@ -71,9 +83,9 @@
                 <c:choose>
                     <c:when test="${not empty posts}">
                         <c:forEach items="${posts}" var="post">
-                            <div class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
-                                    <img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" />
+                            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                                <div class="flex-shrink-0 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+                                    <img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" class="w-8 h-8" />
                                 </div>
                                 <p class="text-gray-800 dark:text-white">${post.title}</p>
                             </div>
