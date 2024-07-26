@@ -6,12 +6,9 @@
   <section class="mx-auto mt-20 h-fit max-w-3xl rounded-xl bg-slate-50 p-6 dark:bg-neutral-800">
     <div class="font-league-normal just mb-2 flex flex-col gap-x-3 md:flex-row md:items-center">
       <h1 class="text-4xl font-semibold text-orange-700">${post.supplier.fullName}</h1>
-      <p class="mt-2 w-fit rounded-full bg-neutral-700 px-4 py-1 font-medium text-white md:mt-0 dark:border dark:border-white">Mudanzas</p>
+      <p class="mt-2 w-fit rounded-full bg-neutral-700 px-4 py-1 font-medium text-white md:mt-0 dark:border dark:border-white">${post.category}</p>
     </div>
-    <p class="mb-4">
-    <img src="<c:url value='/images/home/Puntuacion3.png'/>" alt="Puntuacion 3" class="h-5 w-fit" />
-    </p>
-    <p class="font-phrase font-light text-neutral-800 md:text-lg dark:text-stone-50">Quia enim ullam et neque necessitatibus. Error suscipit deserunt ab. Nam nam non totam quia. Nulla neque quis laudantium. Aspernatur aliquid est vero eaque assumenda consequatur. Quas reprehenderit cupiditate temporibus. Et dicta deserunt possimus. Quis occaecati aperiam possimus delectus cupiditate id sint.</p>
+    <p class="font-phrase font-light text-neutral-800 md:text-lg dark:text-stone-50">${order.description}</p>
     <form:form method="post" action="/ordenes/${order.id}/${post.id}" modelAttribute="review" class="mt-4 flex flex-col items-start gap-y-2">
     <h2 class="text-3xl font-semibold text-neutral-800 dark:text-stone-50">Dejar una reseña</h2>
     <form:hidden path="client" value="${userInSession.id}" />

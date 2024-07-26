@@ -124,8 +124,13 @@ public class OrderController {
 		
 		model.addAttribute("order", order);
 		model.addAttribute("post", order.getPostOrder());
-
-		ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/review.jsp");
+		
+		if (order.getStatusOrder().contains("0")) {
+			ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/orden.jsp");
+		} else {
+			ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/review.jsp");
+		}
+		
 
 		return "index.jsp";
 	}
