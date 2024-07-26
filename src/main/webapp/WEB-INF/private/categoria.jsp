@@ -12,7 +12,14 @@
 	</section>
 	<section class="max-w-6xl mx-4 my-10 flex flex-col items-center gap-2 lg:mx-auto">
 		<h1 class="font-phrase text-3xl text-neutral-800 dark:text-stone-50">Los mejores en ${pageTitle}</h1>
-
+		<form id="filterForm" action="/servicios/${category}" method="get" class="my-2">
+			<input type="hidden" id="search" name="search" value="${search}" />
+			<select name="filter" class="rounded-3xl bg-white px-2 py-1 text-center shadow-lg outline-none focus:outline-neutral-700 md:py-2 dark:bg-neutral-700 dark:text-white text-center" onchange="submitForm()">
+				<option value="MasAntiguos" class="text-center" <c:if test="${filter == 'MasAntiguos' || empty filter}">selected</c:if>>Más Antiguos</option>
+				<option value="MasRecientes" class="text-center" <c:if test="${filter == 'MasRecientes'}">selected</c:if>>Más Recientes</option>
+				<option value="MejorCalificacion" class="text-center" <c:if test="${filter == 'MejorCalificacion'}">selected</c:if>>Mejor Calificados</option>
+			</select>
+		</form>
 		<c:choose>
 			<c:when test="${not empty posts}">
 				<div class="grid grid-cols-1 gap-8 py-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
@@ -49,4 +56,9 @@
 		</c:choose>
 
 	</section>
+	<script>
+    function submitForm() {
+        document.getElementById('filterForm').submit();
+    }
+</script>
 </main>

@@ -34,7 +34,8 @@ public class ServiciosController {
 
 	@GetMapping("/servicios/Busqueda")
 	public String servicios(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
@@ -44,8 +45,10 @@ public class ServiciosController {
 			return "redirect:/";
 		}
 
-		List<Post> posts = postService.findByTitleOrDescriptionContaining(search);
+		List<Post> posts = postService.findByTitleOrDescriptionContaining(search, filter);
 		model.addAttribute("search", search);
+		model.addAttribute("filter", filter);
+		
 		ModelUtils.setupModelCategory(userTemp, model, search, "Busqueda", posts);
 		Map<Long, Integer> postRatings = postService.calculateAverageRatingByPosts(posts);
 		model.addAttribute("postRatings", postRatings);
@@ -55,56 +58,58 @@ public class ServiciosController {
 
 	@GetMapping("/servicios/Fleteros")
 	public String serviceFleteros(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
-		return handleService(session, model, "Fletes", Category.Fletero, search);
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
+		return handleService(session, model, "Fletes", Category.Fletero, search, filter);
 	}
 
 	@GetMapping("/servicios/Jardineros")
 	public String serviceJardineros(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
-		return handleService(session, model, "Jardinería", Category.Jardinero, search);
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
+		return handleService(session, model, "Jardinería", Category.Jardinero, search, filter);
 	}
 
 	@GetMapping("/servicios/Electricistas")
 	public String serviceElectricistas(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
-		return handleService(session, model, "Electricistas", Category.Electricista, search);
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
+		return handleService(session, model, "Electricistas", Category.Electricista, search, filter);
 	}
 
 	@GetMapping("/servicios/Gasistas")
 	public String serviceGasistas(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
-		return handleService(session, model, "Gasistas", Category.Gasista, search);
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
+		return handleService(session, model, "Gasistas", Category.Gasista, search, filter);
 	}
 
 	@GetMapping("/servicios/Plomeros")
 	public String servicePlomeros(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
-		return handleService(session, model, "Plomeros", Category.Plomero, search);
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
+		return handleService(session, model, "Plomeros", Category.Plomero, search, filter);
 	}
 
 	@GetMapping("/servicios/Carpinteros")
 	public String serviceCarpinteros(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
-		return handleService(session, model, "Carpinteros", Category.Carpintero, search);
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
+		return handleService(session, model, "Carpinteros", Category.Carpintero, search, filter);
 	}
 
 	@GetMapping("/servicios/Otros")
 	public String serviceOtro(HttpSession session, Model model,
-			@RequestParam(value = "search", required = false) String search) {
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "filter", required = false) String filter) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
 		}
 
-		List<Post> posts;
-		if (search == null || search.trim().isEmpty()) {
-			posts = postService.findPostsExcludingSpecificCategories();
-		} else {
-			posts = postService.findPostsExcludingCategoriesAndSearch(search);
-			model.addAttribute("search", search);
-		}
-
+		List<Post> posts = postService.findPostsExcludingSpecificCategoriesAndFilter(search, filter);
+		model.addAttribute("search", search);
+		
 		ModelUtils.setupModelCategory(userTemp, model, "Otros", "Otros", posts);
 		Map<Long, Integer> postRatings = postService.calculateAverageRatingByPosts(posts);
 		model.addAttribute("postRatings", postRatings);
@@ -112,20 +117,16 @@ public class ServiciosController {
 		return "index.jsp";
 	}
 
-	private String handleService(HttpSession session, Model model, String imageTitle, Category category,
-			String search) {
+	private String handleService(HttpSession session, Model model, String imageTitle, Category category, String search,
+			String filter) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
 			return "redirect:/iniciar-sesion";
 		}
 
-		List<Post> posts;
-		if (search == null || search.trim().isEmpty()) {
-			posts = postService.findByCategory(category);
-		} else {
-			posts = postService.findByCategoryAndSearchTerm(category, search);
-			model.addAttribute("search", search);
-		}
+		List<Post> posts = postService.findPostsByCategoryAndFilter(category, search, filter);
+		model.addAttribute("search", search);
+		model.addAttribute("filter", filter);
 
 		ModelUtils.setupModelCategory(userTemp, model, imageTitle, category.toString() + "s", posts);
 		Map<Long, Integer> postRatings = postService.calculateAverageRatingByPosts(posts);

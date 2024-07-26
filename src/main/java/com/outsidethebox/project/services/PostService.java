@@ -1,9 +1,11 @@
 package com.outsidethebox.project.services;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,34 +31,96 @@ public class PostService {
 		return postRepository.findById(id).orElse(null);
 	}
 
-	public List<Post> findByTitleOrDescriptionContaining(String search) {
-		return postRepository.findByTitleOrDescriptionContaining(search);
+	public List<Post> findByTitleOrDescriptionContaining(String search, String filter) {
+		List<Post> posts = postRepository.findByTitleOrDescriptionContaining(search);
+
+		if (filter != null) {
+			switch (filter) {
+			case "MasAntiguos":
+				return posts;
+			case "MasRecientes":
+				posts = posts.stream().sorted(Comparator.comparing(Post::getCreatedAt).reversed())
+						.collect(Collectors.toList());
+				break;
+			case "MejorCalificacion":
+				Map<Long, Integer> postRatings = calculateAverageRatingByPosts(posts);
+				posts = posts.stream().sorted(
+						Comparator.comparing((Post post) -> postRatings.getOrDefault(post.getId(), 0)).reversed())
+						.collect(Collectors.toList());
+				break;
+			default:
+				break;
+			}
+		}
+
+		return posts;
 	}
 
 	public List<Post> findByCategory(Category category) {
 		return postRepository.findByCategory(category);
 	}
 
-	public List<Post> findByCategorySortByCreationDate(Category category) {
-		return postRepository.findByCategoryOrderByCreatedAtDesc(category);
+	public List<Post> findPostsByCategoryAndFilter(Category category, String search, String filter) {
+		List<Post> posts;
+		if (search == null || search.trim().isEmpty()) {
+			posts = postRepository.findByCategory(category);
+		} else {
+			posts = postRepository.findByCategoryAndTitleOrDescriptionContainingIgnoreCase(category, search);
+		}
+
+		if (filter != null) {
+			switch (filter) {
+			case "MasAntiguos":
+				return posts;
+			case "MasRecientes":
+				posts = posts.stream().sorted(Comparator.comparing(Post::getCreatedAt).reversed())
+						.collect(Collectors.toList());
+				break;
+			case "MejorCalificacion":
+				Map<Long, Integer> postRatings = calculateAverageRatingByPosts(posts);
+				posts = posts.stream().sorted(
+						Comparator.comparing((Post post) -> postRatings.getOrDefault(post.getId(), 0)).reversed())
+						.collect(Collectors.toList());
+				break;
+			default:
+				break;
+			}
+		}
+
+		return posts;
 	}
 
-	public List<Post> findByCategoryAndSearchTerm(Category category, String searchTerm) {
-		return postRepository.findByCategoryAndTitleOrDescriptionContainingIgnoreCase(category, searchTerm);
-	}
-
-	public List<Post> findPostsExcludingSpecificCategories() {
+	public List<Post> findPostsExcludingSpecificCategoriesAndFilter(String search, String filter) {
 		List<Category> excludedCategories = Arrays.asList(Category.Fletero, Category.Jardinero, Category.Electricista,
 				Category.Gasista, Category.Plomero, Category.Carpintero);
 
-		return postRepository.findPostsExcludingCategories(excludedCategories);
-	}
+		List<Post> posts;
+		if (search == null || search.trim().isEmpty()) {
+			posts = postRepository.findPostsExcludingCategories(excludedCategories);
+		} else {
+			posts = postRepository.findPostsExcludingCategoriesAndSearch(excludedCategories, search);
+		}
 
-	public List<Post> findPostsExcludingCategoriesAndSearch(String search) {
-		List<Category> excludedCategories = Arrays.asList(Category.Fletero, Category.Jardinero, Category.Electricista,
-				Category.Gasista, Category.Plomero, Category.Carpintero);
+		if (filter != null) {
+			switch (filter) {
+			case "MasAntiguos":
+				return posts;
+			case "MasRecientes":
+				posts = posts.stream().sorted(Comparator.comparing(Post::getCreatedAt).reversed())
+						.collect(Collectors.toList());
+				break;
+			case "MejorCalificacion":
+				Map<Long, Integer> postRatings = calculateAverageRatingByPosts(posts);
+				posts = posts.stream().sorted(
+						Comparator.comparing((Post post) -> postRatings.getOrDefault(post.getId(), 0)).reversed())
+						.collect(Collectors.toList());
+				break;
+			default:
+				break;
+			}
+		}
 
-		return postRepository.findPostsExcludingCategoriesAndSearch(excludedCategories, search);
+		return posts;
 	}
 
 	public boolean isDuplicateTitle(String title) {
