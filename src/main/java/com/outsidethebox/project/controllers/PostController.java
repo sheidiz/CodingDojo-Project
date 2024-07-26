@@ -1,5 +1,7 @@
 package com.outsidethebox.project.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.outsidethebox.project.models.Category;
+import com.outsidethebox.project.models.Order;
 import com.outsidethebox.project.models.Post;
 import com.outsidethebox.project.models.SubCategory;
 import com.outsidethebox.project.models.User;
+import com.outsidethebox.project.services.OrderService;
 import com.outsidethebox.project.services.PostService;
 import com.outsidethebox.project.services.UserService;
 import com.outsidethebox.project.utils.ModelUtils;
@@ -124,4 +128,47 @@ public class PostController {
 		postService.deleteById(id);
 		return "redirect:/posts"; // Redirigir a la lista de posts después de eliminar
 	}
+	
+	@GetMapping("/publicaciones/{postId}")
+	public String supplierPost(@PathVariable("postId") Long postId,
+							   HttpSession session, 
+							   Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
+		
+		User user = userService.findById(userTemp.getId());
+		Post post = postService.findById(postId);
+		List<Order> orders = post.getOrdersPost();
+		Integer averageRating = postService.calculateAverageRatingByPost(post);
+		ModelUtils.setupModel(user, model, post.getTitle(), "/private/publicacion-supplier.jsp");
+		
+		model.addAttribute("post", post);
+		model.addAttribute("orders", orders);
+		model.addAttribute("rating", "Puntuacion" + averageRating);
+		
+		return "index.jsp";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
