@@ -5,7 +5,7 @@
 <main class="flex min-h-screen justify-center bg-post bg-center bg-cover p-3 md:p-4">
 	<section class="mx-auto mt-20 h-fit md:min-w-[650px] max-w-3xl rounded-xl bg-slate-50 p-6 dark:bg-neutral-800 text-neutral-800 md:text-lg dark:text-stone-50">
 		<div class="font-league-normal just mb-2 flex flex-col gap-x-3 md:flex-row md:items-center">
-			<h1 class="text-4xl font-semibold text-orange-700">${post.supplier.fullName}</h1>
+			<a href="/laburantes/${post.supplier.id}" class="text-4xl font-semibold text-orange-700">${post.supplier.fullName}</a>
 			<p class="mt-2 w-fit rounded-full bg-neutral-700 px-4 py-1 font-medium text-white md:mt-0 dark:border dark:border-white">${post.category}</p>
 		</div>
 		<c:choose>

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,10 @@ public class PostService {
 	public Integer calculateAverageRatingByPost(Post post) {
 		Double averageRating = reviewService.calculateAverageRatingByPost(post.getId());
 		return averageRating != null ? (int) Math.floor(averageRating) : 0;
+	}
+
+	public Set<Category> getDistinctCategoriesBySupplier(Long supplierId) {
+		return postRepository.findDistinctCategoriesBySupplier(supplierId);
 	}
 
 }

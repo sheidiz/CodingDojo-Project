@@ -30,7 +30,7 @@
 									<div class="size-10 rounded-full bg-slate-100 p-1 drop-shadow-[0_2px_2px_rgba(0,0,0,0.25)] overflow-hidden">
 										<img src="<c:url value='${post.supplier.profilePicture}'/>" alt="Fleteros" />
 									</div>
-									<h3 class="text-2xl font-semibold text-orange-700">${post.supplier.fullName}</h3>
+									<a class="text-2xl font-semibold text-orange-700" href="/laburantes/${post.supplier.id}">${post.supplier.fullName}</a>
 								</div>
 								<p class="text-lg font-medium">${post.title}</p>
 								<p class="text-sm font-semibold">Desde $${post.price}-</p>

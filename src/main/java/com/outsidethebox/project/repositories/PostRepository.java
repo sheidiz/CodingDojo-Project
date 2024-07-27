@@ -2,6 +2,7 @@ package com.outsidethebox.project.repositories;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -23,6 +24,9 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 	Optional<Post> findById(Long id);
 
 	List<Post> findByCategory(Category category);
+
+	@Query("SELECT DISTINCT p.category FROM Post p WHERE p.supplier.id = :supplierId")
+	Set<Category> findDistinctCategoriesBySupplier(@Param("supplierId") Long supplierId);
 
 	List<Post> findByCategoryOrderByCreatedAtDesc(Category category);
 

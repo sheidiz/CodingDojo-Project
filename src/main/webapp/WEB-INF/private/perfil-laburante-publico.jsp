@@ -1,52 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<main class="bg-perfil flex min-h-[80vh] flex-col items-start gap-y-4 bg-cover bg-center p-10 md:flex-row md:gap-x-10">
-  <div class="mx-auto w-full max-w-screen-xl rounded-xl bg-gray-100 p-4 md:w-4/5">
-    <div class="mb-8 text-center">
-      <h2 class="mb-4 text-3xl font-bold">Fletes Carlitos</h2>
-      <p class="mb-4 text-base text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis corporis iusto obcaecati rem, eum corrupti! Illum ex quaerat obcaecati architecto dolore repudiandae quas quisquam, doloremque natus mollitia hic dicta officiis?</p>
-      <button class="rounded bg-orange-500 px-4 py-4 text-white hover:bg-orange-600">¡Contratar servicios!</button>
-    </div>
-  </div>
-  <div class="mx-auto w-full max-w-screen-xl rounded-xl bg-white p-4">
-    <div class="rounded-lg bg-gray-100 p-4">
-      <div class="mb-2 flex flex-wrap justify-center">
-        <img src="https://placehold.co/260x60" alt="BigStar" />
-      </div>
-      <div class="mb-2 flex flex-wrap justify-center">
-        <img src="https://placehold.co/60x60" alt="Servicio" class="m-2 w-10 md:w-12 lg:w-16" />
-        <img src="https://placehold.co/60x60" alt="Servicio" class="m-2 w-10 md:w-12 lg:w-16" />
-        <img src="https://placehold.co/60x60" alt="Servicio" class="m-2 w-10 md:w-12 lg:w-16" />
-      </div>
-      <h3 class="mb-4 text-xl font-bold">Últimas Reviews:</h3>
-      <div class="mb-4 flex items-center">
-        <img src="https://placehold.co/40x40" alt="Servicio de Mudanza" class="mr-4 w-12" />
-        <!-- Placeholder for the icon -->
-        <div>
-          <p class="font-bold">Carla Martinez</p>
-          <div class="mb-2 flex">
-            <img src="https://placehold.co/120x20" alt="Star"/>
-          </div>
-          <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque...</p>
-        </div>
-      </div>
-    </div>
-    <div class="mt-8 rounded-lg bg-gray-100 p-4">
-      <h3 class="mb-4 text-xl font-bold">Publicaciones:</h3>
-      <div class="mb-4 flex items-center">
-        <img src="https://placehold.co/40x40" alt="Servicio de Mudanza" class="mr-4 w-12" />
-        <!-- Placeholder for the icon -->
-        <p>Servicio de Mudanza</p>
-      </div>
-      <div class="mb-4 flex items-center">
-        <img src="https://placehold.co/40x40" alt="Arreglos del hogar" class="mr-4 w-12" />
-        <!-- Placeholder for the icon -->
-        <p>Arreglos del hogar</p>
-      </div>
-      <div class="flex items-center">
-        <img src="https://placehold.co/40x40" alt="Electricista" class="mr-4 w-12" />
-        <!-- Placeholder for the icon -->
-        <p>Electricista</p>
-      </div>
-    </div>
-  </div>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<main class="bg-perfil bg-cover bg-center">
+	<!-- Public Profile Section -->
+	<div class="mx-auto flex min-h-[80vh] max-w-screen-2xl flex-col items-start gap-y-4 p-8 md:flex-row md:gap-x-12">
+		<div class="mx-auto w-full rounded-xl p-6 shadow-md bg-white dark:bg-neutral-700 dark:text-white">
+			<div class="mb-6 text-center">
+				<h2 class="pb-5 text-4xl font-bold">${userInSession.fullName}</h2>
+				<p class="m-2 text-gray-700 dark:text-white">${userInSession.phoneNumber}</p>
+			</div>
+			<div class="flex flex-col items-center">
+				<a href="/" class="mb-2 w-fit rounded-full bg-orange-500 px-10 py-2 text-white hover:bg-orange-700">Editar Perfil</a>
+			</div>
+		</div>
+		<div class="mx-auto w-full rounded-xl bg-white dark:bg-neutral-700 p-6 shadow-md">
+			<div class="mb-2">
+				<c:if test="${rating != '0'}">
+					<img src="<c:url value='/images/perfil/BigPuntuacion${rating}.png'/>" alt="Puntuación ${review.rating}" class="mx-auto md:h-20 w-fit" />
+					<div class="my-4 md:mx-2 flex justify-around">
+						<c:forEach items="${categories}" var="cat">
+							<div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+								<img src="<c:url value='/images/iconos/${cat}s.png'/>" alt="${cat}" class="size-10 md:size-20"  />
+							</div>
+						</c:forEach>
+					</div>
+				</c:if>
+			</div>
+			<div>
+				<h3 class="mb-2 text-xl font-bold dark:text-white">Últimas reseñas:</h3>
+				<c:choose>
+					<c:when test="${not empty reviews}">
+						<c:forEach items="${reviews}" var="review">
+							<div class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md  dark:bg-neutral-600">
+								<div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+									<img src="<c:url value='/images/iconos/${review.post.category}s.png'/>" alt="${review.post.category}" class="w-12 h-fit" />
+								</div>
+								<div class="text-gray-800 dark:text-white">
+									<p class="font-semibold">${review.post.title}</p>
+									<img src="<c:url value='/images/home/Puntuacion${review.rating}.png'/>" alt="Puntuación ${review.rating}" class="h-4 w-fit" />
+									<p class="text-xs">
+										<fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd" />
+									</p>
+									<p class="text-sm">${review.comentary}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p class="mb-4 dark:text-white">Todavía no cuenta con reseñas.</p>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="mt-2">
+				<h3 class="mb-2 text-xl font-bold dark:text-white">Publicaciones:</h3>
+				<c:choose>
+					<c:when test="${not empty posts}">
+						<c:forEach items="${posts}" var="post">
+							<div class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+								<div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+									<img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" class="w-12 h-fit" />
+								</div>
+								<div class="text-gray-800 dark:text-white">
+									<a href="/servicios/${post.category}s/${post.id}" class="text-gray-800 dark:text-white">${post.title}</a>
+									<p class="text-sm">${post.description}</p>
+									<p class="text-sm">Desde $${post.price}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<p class="mb-4 dark:text-white">Todavía no hay publicaciones creadas.</p>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+	</div>
 </main>

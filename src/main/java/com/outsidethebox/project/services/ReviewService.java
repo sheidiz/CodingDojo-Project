@@ -1,11 +1,13 @@
 package com.outsidethebox.project.services;
 
 import java.util.List;
+import java.util.OptionalDouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.outsidethebox.project.models.Review;
+import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.repositories.ReviewRepository;
 
 @Service
@@ -24,6 +26,20 @@ public class ReviewService {
 
 	public List<Review> getReviewsByClient(Long clientId) {
 		return reviewRepository.findByClientId(clientId);
+	}
+
+	public List<Review> getReviewsBySupplier(User supplier) {
+		return reviewRepository.findBySupplier(supplier);
+	}
+
+	public int getAverageRating(List<Review> reviews) {
+		if (reviews == null || reviews.isEmpty()) {
+			return 0;
+		}
+
+		OptionalDouble average = reviews.stream().mapToInt(Review::getRating).average();
+
+		return average.isPresent() ? (int) Math.round(average.getAsDouble()) : 0;
 	}
 
 	public void deleteReview(Long id) {
