@@ -41,7 +41,7 @@
 			</div>
 			<div class="flex gap-x-4">
 				<input type="submit" value="Contratar" class="ml-auto block rounded-full bg-orange-800 px-8 py-3 font-semibold text-white shadow-md hover:scale-105" />
-				<a href="/servicios" class="block rounded-full bg-black px-8 py-3 font-semibold text-white shadow-md hover:scale-105">Cancelar</a>
+				<a href="/" class="block rounded-full bg-black px-8 py-3 font-semibold text-white shadow-md hover:scale-105">Cancelar</a>
 			</div>
 		</form:form>
 	</section>
