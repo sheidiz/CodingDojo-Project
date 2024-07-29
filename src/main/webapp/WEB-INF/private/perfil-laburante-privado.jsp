@@ -85,23 +85,24 @@
             <div>
                 <h3 class="mb-2 text-xl font-bold dark:text-white">Tus Publicaciones:</h3>
                 <c:choose>
-                    <c:when test="${not empty posts}">
-                        <c:forEach items="${posts}" var="post">
-                            <a href="/servicios/${post.category}s" class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
-                                    <img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" class="w-12 h-12" />
-                                </div>
-                                <div>
-                                	<p class="text-gray-800 dark:text-white">${post.title}</p>
-                                	<p class="text-gray-800 text-xs dark:text-white">${post.description}</p>
-                                </div>
-                            </a>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                        <p class="mb-4 dark:text-white">Todavía no hay publicaciones creadas.</p>
-                    </c:otherwise>
-                </c:choose>
+				    <c:when test="${not empty posts}">
+				        <c:forEach items="${posts}" var="post">
+				            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+				                <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+				                    <img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" class="w-12 h-12" />
+				                </div>
+				                <div class="flex-grow">
+				                    <p class="text-gray-800 dark:text-white">${post.title}</p>
+				                    <p class="text-gray-800 text-xs dark:text-white">${post.description}</p>
+				                </div>
+				                <a href="/${post.id}/edit" class="ml-auto w-fit rounded-full bg-gray-700 px-10 py-2 text-white hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Editar</a>
+				            </div>
+				        </c:forEach>
+				    </c:when>
+				    <c:otherwise>
+				        <p class="mb-4 dark:text-white">Todavía no hay publicaciones creadas.</p>
+				    </c:otherwise>
+				</c:choose>
             </div>
         </div>
     </div>
