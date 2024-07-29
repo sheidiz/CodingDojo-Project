@@ -27,9 +27,7 @@
 						<div class="single-review min-w-80 flex flex-1 flex-col justify-between gap-2 rounded-md border bg-white p-4 shadow-lg dark:shadow-white/10">
 							<div class="flex flex-col gap-2">
 								<div class="flex items-center gap-x-4 pb-2 border-b">
-									<div class="size-10 rounded-full bg-slate-100 p-1 drop-shadow-[0_2px_2px_rgba(0,0,0,0.25)] overflow-hidden">
-										<img src="<c:url value='${post.supplier.profilePicture}'/>" alt="Fleteros" />
-									</div>
+									<img src="<c:url value='${post.supplier.profilePicture}'/>" alt="Fleteros" class="size-10 rounded-full bg-slate-100 drop-shadow-[0_2px_2px_rgba(0,0,0,0.25)] object-cover" />
 									<a class="text-2xl font-semibold text-orange-700" href="/laburantes/${post.supplier.id}">${post.supplier.fullName}</a>
 								</div>
 								<p class="text-lg font-medium">${post.title}</p>

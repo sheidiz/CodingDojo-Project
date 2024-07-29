@@ -68,7 +68,7 @@ public class UserController {
 			}
 		} else {
 			// default profile pic
-			newUser.setProfilePicture("/images/users/default-profile.png");
+			newUser.setProfilePicture("/images/users/default-profile.jpg");
 		}
 
 		// Registro del usuario

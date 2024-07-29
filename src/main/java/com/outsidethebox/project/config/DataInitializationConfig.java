@@ -51,14 +51,14 @@ public class DataInitializationConfig implements CommandLineRunner {
 		
 		if (userRepository.count() == 0) {
 			List<User> users = List.of(
-					new User("Juan Electronica", "juan.perez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", true, dateFormat.parse("2023-12-10")),
-					new User("María López", "maria.lopez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", false, dateFormat.parse("2023-12-10")),
-					new User("Carlos Plomero", "carlos.garcia@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", true, dateFormat.parse("2023-12-10")),
-					new User("Ana Torres", "ana.torres@example.com", "1244567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", false, dateFormat.parse("2023-12-31")),
-					new User("Luis Martínez Carpintero", "luis.martinez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", true, dateFormat.parse("2023-12-10")),
-					new User("Elena Gómez", "elena.gomez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", false, dateFormat.parse("2023-12-10")),
-					new User("Miguel Mantenimiento", "miguel.santos@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", true, dateFormat.parse("2023-12-10")),
-					new User("Miranda Servicios", "miranda.servicios@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.png", true, dateFormat.parse("2023-12-10"))
+					new User("Juan Electrónica", "juan.perez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/juan-electronica.png", true, dateFormat.parse("2023-12-10")),
+					new User("María López", "maria.lopez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/maria-lopez.png", false, dateFormat.parse("2023-12-10")),
+					new User("Carlos Plomero", "carlos.garcia@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/carlos-plomero.png", true, dateFormat.parse("2023-12-10")),
+					new User("Ana Torres", "ana.torres@example.com", "1244567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.jpg", false, dateFormat.parse("2023-12-31")),
+					new User("Luis Martínez Carpintero", "luis.martinez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/luis-carpinteria.png", true, dateFormat.parse("2023-12-10")),
+					new User("Elena Gómez", "elena.gomez@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.jpg", false, dateFormat.parse("2023-12-10")),
+					new User("Miguel Mantenimiento", "miguel.santos@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/miguel-mantenimiento.png", true, dateFormat.parse("2023-12-10")),
+					new User("Miranda Servicios", "miranda.servicios@example.com", "1234567890", "$2a$10$EVIrVICokuNQ4Ls6iwzlweH0aaRcd4RqeIP1omisFiz6EfOi2lwMO", "/images/users/default-profile.jpg", true, dateFormat.parse("2023-12-10"))
 			);
 			userRepository.saveAll(users);
 			
