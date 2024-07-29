@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import com.outsidethebox.project.models.User;
 import com.outsidethebox.project.repositories.UserRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class UserService {
 	
@@ -51,5 +53,14 @@ public class UserService {
 	
 	public User findById(Long id) {
         return ur.findById(id).orElse(null);
+    }
+
+    public User updateUser(User user) {
+
+        if (ur.existsById(user.getId())) {
+           return ur.save(user);  // Guarda o actualiza el usuario en la base de datos
+        } else {
+           return null;
+        }
     }
 }
