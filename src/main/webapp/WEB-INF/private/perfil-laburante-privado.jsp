@@ -12,11 +12,13 @@
                     <img src="<c:url value='${userInSession.profilePicture}'/>" alt="Fleteros" />
                 </div>
                 <h2 class="pb-5 text-4xl font-bold">${userInSession.fullName}</h2>
-                <p class="m-2 text-gray-700 dark:text-white">${userInSession.phoneNumber}</p>
+                <p class="m-2 text-lg font-semibold text-gray-700 dark:text-white">
+					<i class="fas fa-phone pr-1"></i> ${userInSession.phoneNumber}
+				</p>
             </div>
             <div class="flex flex-col items-center">
-                <a href="/" class="mb-2 w-fit rounded-full bg-orange-500 px-10 py-2 text-white hover:bg-orange-700">Editar Perfil</a>
-                <a href="/nueva-publicacion" class="w-fit rounded-full bg-gray-700 px-10 py-2 text-white hover:bg-gray-800">Crear Post</a>
+                <a href="/editar-perfil" class="mb-2 w-fit rounded-full bg-orange-500 px-10 py-2 text-white hover:bg-orange-700">Editar Perfil</a>
+                <a href="/nueva-publicacion" class="w-fit rounded-full bg-gray-700 px-10 py-2 text-white hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Crear Post</a>
             </div>
         </div>
         <!-- Orders and Publications Section -->
@@ -27,14 +29,15 @@
                 <c:choose>
                     <c:when test="${not empty pendingOrders}">
                         <c:forEach items="${pendingOrders}" var="po">
-                            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="flex-shrink-0 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
-                                    <img src="<c:url value='/images/iconos/${po.category}s.png'/>" alt="${po.category}" class="w-12 h-12" />
-                                </div>
+                            <a href="/ordenes/${po.id}" class="block mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                                <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+									<img src="<c:url value='/images/iconos/${po.category}s.png'/>" alt="${po.category}" class="w-12 h-fit" />
+								</div>
                                 <div class="flex-grow flex items-center justify-between">
                                 	<div class="flex-col">
-	                                    <a class="text-gray-800 dark:text-white" href="/">¡${po.client.fullName} solicitó tus servicios!</a>
-	                                    <p class="text-gray-800 dark:text-white text-sm"><fmt:formatDate value="${po.estimatedDate}" pattern="dd-MM-yyyy"/></p>
+	                                    <p class="text-gray-800 dark:text-white">¡${po.client.fullName} solicitó tus servicios!</p>
+	                                    <p class="text-gray-800 dark:text-white text-sm">${po.postOrder.title}</p>
+	                                    <p class="text-gray-800 dark:text-white text-xs"><fmt:formatDate value="${po.estimatedDate}" pattern="dd-MM-yyyy"/></p>
 	                                </div>
                                     <form action="/completeOrder" method="post">
                                         <input type="hidden" name="orderId" value="${po.id}" />
@@ -44,7 +47,7 @@
                                         </button>
                                     </form>
                                 </div>
-                            </div>
+                            </a>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
@@ -55,21 +58,22 @@
                 <c:choose>
                     <c:when test="${not empty completedOrders}">
                         <c:forEach items="${completedOrders}" var="co">
-                            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="flex-shrink-0 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+                            <a href="/ordenes/${co.id}" class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                                <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
                                     <img src="<c:url value='/images/iconos/${co.category}s.png'/>" alt="${co.category}" class="w-12 h-12" />
                                 </div>
                                 <div class="flex-grow flex items-center justify-between">
                                     <div class="flex-col">
 										<p class="text-gray-800 dark:text-white">¡Realizaste un trabajo para ${co.client.fullName}!</p>
-	                                    <p class="text-gray-800 dark:text-white text-sm"><fmt:formatDate value="${co.estimatedDate}" pattern="dd-MM-yyyy"/></p>
+										<p class="text-gray-800 dark:text-white text-sm">${co.postOrder.title}</p>
+	                                    <p class="text-gray-800 dark:text-white text-xs"><fmt:formatDate value="${co.estimatedDate}" pattern="dd-MM-yyyy"/></p>
 	                                </div>
                                     
-                                    <p class="ml-4 rounded-3xl bg-gray-200 p-3">
+                                    <p class="ml-4 rounded-3xl bg-green-300 p-3">
                                         <i class="fas fa-check" style="color: green; font-size: 24px;"></i>
                                     </p>
                                 </div>
-                            </div>
+                            </a>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
@@ -83,12 +87,15 @@
                 <c:choose>
                     <c:when test="${not empty posts}">
                         <c:forEach items="${posts}" var="post">
-                            <div class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
-                                <div class="flex-shrink-0 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
-                                    <img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" class="w-8 h-8" />
+                            <a href="/servicios/${post.category}s" class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                                <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
+                                    <img src="<c:url value='/images/iconos/${post.category}s.png'/>" alt="${post.category}" class="w-12 h-12" />
                                 </div>
-                                <p class="text-gray-800 dark:text-white">${post.title}</p>
-                            </div>
+                                <div>
+                                	<p class="text-gray-800 dark:text-white">${post.title}</p>
+                                	<p class="text-gray-800 text-xs dark:text-white">${post.description}</p>
+                                </div>
+                            </a>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>

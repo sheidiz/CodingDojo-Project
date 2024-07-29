@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.outsidethebox.project.models.User;
+import com.outsidethebox.project.models.UserEditDTO;
 import com.outsidethebox.project.services.UserService;
 import com.outsidethebox.project.utils.ModelUtils;
 
@@ -60,7 +61,7 @@ public class UserController {
 				byte[] bytes = file.getBytes();
 				Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
 				Files.write(path, bytes);
-				
+
 				newUser.setProfilePicture("/images/users/" + file.getOriginalFilename());
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -88,7 +89,7 @@ public class UserController {
 	}
 
 	@GetMapping("/iniciar-sesion")
-	public String login(Model model, HttpSession session) {	
+	public String login(Model model, HttpSession session) {
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp != null) {
 			return "redirect:/";
@@ -116,53 +117,58 @@ public class UserController {
 		session.removeAttribute("userInSession");
 		return "redirect:/";
 	}
+
 	@GetMapping("/editar-perfil")
-	public String editProfile(Model model, HttpSession session, @ModelAttribute("user") User user) {
-	    User userTemp = (User) session.getAttribute("userInSession");
-	    if (userTemp == null) {
-	        return "redirect:/";
-	    }
-	    User foundUser=serv.findById(userTemp.getId());
-	    foundUser.setConfirm(foundUser.getPassword());
-	    
-	    model.addAttribute("user", foundUser);
-		ModelUtils.setupModel(foundUser, model, "Editar Perfil", "/public/editar-perfil.jsp");
-		
-		return "index.jsp";	
+	public String editProfile(Model model, HttpSession session, @ModelAttribute("user") UserEditDTO userEdit) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/";
 		}
+		User foundUser = serv.findById(userTemp.getId());
+		userEdit = new UserEditDTO(foundUser.getId(), foundUser.getEmail(), foundUser.getFullName(), foundUser.getPhoneNumber(), foundUser.getProfilePicture());
+
+		model.addAttribute("user", userEdit);
+		ModelUtils.setupModel(foundUser, model, "Editar Perfil", "/private/editar-perfil.jsp");
+
+		return "index.jsp";
+	}
+
 	@PutMapping("/edicion-perfil")
-	public String updateProfile(@ModelAttribute("user") User user, BindingResult result,
-	                            @RequestParam("image") MultipartFile file, HttpSession session,
-	                            RedirectAttributes redirectAttributes, Model model) {
-    	
-	    User foundUser=serv.findById(user.getId());
-	    user.setConfirm(foundUser.getPassword());
-	    if (!file.isEmpty()) {
-	        try {
-	            byte[] bytes = file.getBytes();
-	            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-	            Files.write(path, bytes);
-	            user.setProfilePicture("/images/users/" + file.getOriginalFilename());
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	            redirectAttributes.addFlashAttribute("error", "Error al guardar la foto de perfil.");
-	            return "index.jsp";
-	        }
-	    }else {
-	    	user.setProfilePicture(foundUser.getProfilePicture());
-	    }
-	    
-	    user.setClienReviews(foundUser.getClienReviews());
-	    user.setClientOrders(foundUser.getClientOrders());
-	    user.setSupplierPost(foundUser.getSupplierPost());
-	    user.setSupplier(foundUser.isSupplier());
-	    
-	    User updatedUser=serv.updateUser(user);
-	       if(updatedUser==null) {
-	    	   System.out.println("nulo");
-	       }
-	
-	    session.setAttribute("userInSession", user);
-	    return "redirect:/perfil";
+	public String updateProfile(@Valid @ModelAttribute("user") UserEditDTO userEdit, BindingResult result,
+			@RequestParam("image") MultipartFile file, HttpSession session, RedirectAttributes redirectAttributes,
+			Model model) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/";
+		}
+		
+		User foundUser = serv.findById(userTemp.getId());
+		
+		if(result.hasErrors()) {
+			model.addAttribute("user", userEdit);
+			ModelUtils.setupModel(foundUser, model, "Editar Perfil", "/private/editar-perfil.jsp");
+			return "index.jsp";
+		}
+		
+		if (!file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+				Files.write(path, bytes);
+				foundUser.setProfilePicture("/images/users/" + file.getOriginalFilename());
+			} catch (IOException e) {
+				e.printStackTrace();
+				redirectAttributes.addFlashAttribute("error", "Error al guardar la foto de perfil.");
+				return "index.jsp";
+			}
+		}
+		foundUser.setFullName(userEdit.getFullName());
+		foundUser.setPhoneNumber(userEdit.getPhoneNumber());
+		foundUser.setConfirm(foundUser.getPassword());
+
+		User updatedUser = serv.updateUser(foundUser);
+
+		session.setAttribute("userInSession", updatedUser);
+		return "redirect:/perfil";
 	}
 }

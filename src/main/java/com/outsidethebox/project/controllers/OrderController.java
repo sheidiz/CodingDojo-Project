@@ -99,21 +99,21 @@ public class OrderController {
 
 		Order order = os.findById(orderId);
 		User usuario = order.getClient();
-		
-		if (order == null || usuario.getId() != userTemp.getId()) {
+		User supplier = order.getPostOrder().getSupplier();
+
+		if (order == null || (usuario.getId() != userTemp.getId() && supplier.getId() != userTemp.getId())) {
 			return "redirect:/";
 		}
-		
-		
+		User foundUser = us.findById(userTemp.getId());
+
 		model.addAttribute("order", order);
 		model.addAttribute("post", order.getPostOrder());
-		
-		if (order.getStatusOrder().contains("0")) {
-			ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/orden.jsp");
+
+		if (order.getStatusOrder().contains("0") || userTemp.isSupplier()) {
+			ModelUtils.setupModel(foundUser, model, order.getPostOrder().getTitle(), "/private/orden.jsp");
 		} else {
-			ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/review.jsp");
+			ModelUtils.setupModel(foundUser, model, order.getPostOrder().getTitle(), "/private/review.jsp");
 		}
-		
 
 		return "index.jsp";
 	}
@@ -121,7 +121,7 @@ public class OrderController {
 	@PostMapping("/ordenes/{orderId}/{orderPostOrderId}")
 	public String enviarReview(@PathVariable("orderId") Long orderId,
 			@PathVariable("orderPostOrderId") Long postOrderId, HttpSession session,
-			@Valid @ModelAttribute("review") Review review, BindingResult result ,Model model) {
+			@Valid @ModelAttribute("review") Review review, BindingResult result, Model model) {
 
 		User userTemp = (User) session.getAttribute("userInSession");
 		if (userTemp == null) {
@@ -130,76 +130,78 @@ public class OrderController {
 
 		Order order = os.findById(orderId);
 		User usuario = order.getClient();
-		
+
 		if (order == null || usuario.getId() != userTemp.getId()) {
 			return "redirect:/";
 		}
 
 		model.addAttribute("order", order);
 		model.addAttribute("post", order.getPostOrder());
-		
-		if(result.hasErrors()) {
+
+		if (result.hasErrors()) {
 			ModelUtils.setupModel(userTemp, model, order.getPostOrder().getTitle(), "/private/review.jsp");
 			return "index.jsp";
 		}
-		
+
 		rs.saveReview(review);
-		return "redirect:/";
+		return "redirect:/perfil";
 	}
-	
+
 	@PostMapping("/completeOrder")
-	public String completeOrder(@RequestParam("orderId") Long orderId, HttpSession session, RedirectAttributes redirectAttributes) {
-	    User userTemp = (User) session.getAttribute("userInSession");
-	    if (userTemp == null) {
-	        return "redirect:/iniciar-sesion";
-	    }
+	public String completeOrder(@RequestParam("orderId") Long orderId, HttpSession session,
+			RedirectAttributes redirectAttributes) {
+		User userTemp = (User) session.getAttribute("userInSession");
+		if (userTemp == null) {
+			return "redirect:/iniciar-sesion";
+		}
 
-	    Order order = os.findById(orderId);
-	    if (order == null) {
-	        redirectAttributes.addFlashAttribute("error", "Order not found.");
-	        return "redirect:/perfil";
-	    }
+		Order order = os.findById(orderId);
+		if (order == null) {
+			redirectAttributes.addFlashAttribute("error", "Order not found.");
+			return "redirect:/perfil";
+		}
 
-	    if (!order.getPostOrder().getSupplier().getId().equals(userTemp.getId())) {
-	        redirectAttributes.addFlashAttribute("error", "Order does not belong to the logged-in supplier.");
-	        return "redirect:/perfil";
-	    }
+		if (!order.getPostOrder().getSupplier().getId().equals(userTemp.getId())) {
+			redirectAttributes.addFlashAttribute("error", "Order does not belong to the logged-in supplier.");
+			return "redirect:/perfil";
+		}
 
-	    // Para probar con una fecha fija, puedes definirla aquí
-	    LocalDateTime fixedNow = LocalDateTime.of(2024, 7, 28, 15, 59); // Cambia esto según sea necesario
-	    LocalDateTime estimatedDate = order.getEstimatedDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		// Para probar con una fecha fija, puedes definirla aquí
+		LocalDateTime fixedNow = LocalDateTime.of(2024, 7, 28, 15, 59); // Cambia esto según sea necesario
+		LocalDateTime estimatedDate = order.getEstimatedDate().toInstant().atZone(ZoneId.systemDefault())
+				.toLocalDateTime();
 
-	    System.out.println("Fecha actual: " + fixedNow);
-	    System.out.println("Fecha estimada: " + estimatedDate);
+		System.out.println("Fecha actual: " + fixedNow);
+		System.out.println("Fecha estimada: " + estimatedDate);
 
-	    if (order.getEstimatedDate() != null) {
-	        if (estimatedDate.isAfter(fixedNow)) {
-	            redirectAttributes.addFlashAttribute("error", "The estimated date has not yet passed.");
-	            return "redirect:/perfil";
-	        }
-	    } else {
-	        redirectAttributes.addFlashAttribute("error", "The estimated date is not set.");
-	        return "redirect:/perfil";
-	    }
+		if (order.getEstimatedDate() != null) {
+			if (estimatedDate.isAfter(fixedNow)) {
+				redirectAttributes.addFlashAttribute("error", "The estimated date has not yet passed.");
+				return "redirect:/perfil";
+			}
+		} else {
+			redirectAttributes.addFlashAttribute("error", "The estimated date is not set.");
+			return "redirect:/perfil";
+		}
 
-	    try {
-	        os.completeOrder(orderId);
-	        redirectAttributes.addFlashAttribute("success", "Order completed successfully.");
-	    } catch (DataIntegrityViolationException e) {
-	        redirectAttributes.addFlashAttribute("error", "Data integrity issue.");
-	        System.out.println("DataIntegrityViolationException: " + e.getMessage());
-	        e.printStackTrace();
-	    } catch (JpaSystemException e) {
-	        redirectAttributes.addFlashAttribute("error", "JPA system exception occurred.");
-	        System.out.println("JpaSystemException: " + e.getMessage());
-	        e.printStackTrace();
-	    } catch (Exception e) {
-	        redirectAttributes.addFlashAttribute("error", "An unexpected error occurred while completing the order.");
-	        System.out.println("Exception: " + e.getMessage());
-	        e.printStackTrace();
-	    }
+		try {
+			os.completeOrder(orderId);
+			redirectAttributes.addFlashAttribute("success", "Order completed successfully.");
+		} catch (DataIntegrityViolationException e) {
+			redirectAttributes.addFlashAttribute("error", "Data integrity issue.");
+			System.out.println("DataIntegrityViolationException: " + e.getMessage());
+			e.printStackTrace();
+		} catch (JpaSystemException e) {
+			redirectAttributes.addFlashAttribute("error", "JPA system exception occurred.");
+			System.out.println("JpaSystemException: " + e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "An unexpected error occurred while completing the order.");
+			System.out.println("Exception: " + e.getMessage());
+			e.printStackTrace();
+		}
 
-	    return "redirect:/perfil";
+		return "redirect:/perfil";
 	}
-	
+
 }

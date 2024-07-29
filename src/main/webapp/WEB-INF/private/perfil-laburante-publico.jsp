@@ -7,11 +7,13 @@
 	<div class="mx-auto flex min-h-[80vh] max-w-screen-2xl flex-col items-start gap-y-4 p-8 md:flex-row md:gap-x-12">
 		<div class="mx-auto w-full rounded-xl p-6 shadow-md bg-white dark:bg-neutral-700 dark:text-white">
 			<div class="mb-6 text-center">
+				<div class="mx-auto my-4 size-28 rounded-full bg-slate-100 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2 overflow-hidden">
+					<img src="<c:url value='${userInSession.profilePicture}'/>" alt="Foto Perfil" />
+				</div>
 				<h2 class="pb-5 text-4xl font-bold">${userInSession.fullName}</h2>
-				<p class="m-2 text-gray-700 dark:text-white">${userInSession.phoneNumber}</p>
-			</div>
-			<div class="flex flex-col items-center">
-				<a href="/" class="mb-2 w-fit rounded-full bg-orange-500 px-10 py-2 text-white hover:bg-orange-700">Editar Perfil</a>
+				<p class="m-2 text-lg font-semibold text-gray-700 dark:text-white">
+					<i class="fas fa-phone pr-1"></i> ${userInSession.phoneNumber}
+				</p>
 			</div>
 		</div>
 		<div class="mx-auto w-full rounded-xl bg-white dark:bg-neutral-700 p-6 shadow-md">
