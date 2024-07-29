@@ -16,7 +16,7 @@
             </div>
             <div class="flex flex-col items-center">
                 <a href="/editar-perfil" class="mb-2 w-fit rounded-full bg-orange-500 px-10 py-2 text-white hover:bg-orange-700">Editar Perfil</a>
-                <a href="/nueva-publicacion" class="w-fit rounded-full bg-gray-700 px-10 py-2 text-white hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Crear Post</a>
+                <a href="/nueva-publicacion" class="w-fit rounded-full bg-gray-700 px-10 py-2 text-white hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Crear Publicación</a>
             </div>
         </div>
         <!-- Orders and Publications Section -->

@@ -167,22 +167,12 @@ public class OrderController {
 		}
 
 		// Para probar con una fecha fija, puedes definirla aquí
-		LocalDateTime fixedNow = LocalDateTime.of(2024, 7, 28, 15, 59); // Cambia esto según sea necesario
+		LocalDateTime fixedNow = LocalDateTime.now();
 		LocalDateTime estimatedDate = order.getEstimatedDate().toInstant().atZone(ZoneId.systemDefault())
 				.toLocalDateTime();
 
 		System.out.println("Fecha actual: " + fixedNow);
 		System.out.println("Fecha estimada: " + estimatedDate);
-
-		if (order.getEstimatedDate() != null) {
-			if (estimatedDate.isAfter(fixedNow)) {
-				redirectAttributes.addFlashAttribute("error", "The estimated date has not yet passed.");
-				return "redirect:/perfil";
-			}
-		} else {
-			redirectAttributes.addFlashAttribute("error", "The estimated date is not set.");
-			return "redirect:/perfil";
-		}
 
 		try {
 			os.completeOrder(orderId);
@@ -200,7 +190,7 @@ public class OrderController {
 			System.out.println("Exception: " + e.getMessage());
 			e.printStackTrace();
 		}
-
+		
 		return "redirect:/perfil";
 	}
 
