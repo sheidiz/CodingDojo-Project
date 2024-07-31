@@ -14,7 +14,7 @@
 			</c:when>
 			<c:otherwise>
 				<img src="<c:url value='/images/home/${rating}.png'/>" alt="Puntuación ${rating}" class="mb-4 h-5 w-fit" />
-				<a href="/" class="text-sm text-neutral-700 underline">Ver reseñas (${fn:length(post.reviews)})</a>
+				<a href="/laburantes/${post.supplier.id}" class="text-sm text-neutral-700 underline">Ver reseñas (${fn:length(post.reviews)})</a>
 			</c:otherwise>
 		</c:choose>
 

@@ -24,7 +24,7 @@
 				<c:choose>
 					<c:when test="${not empty pendingOrders}">
 						<c:forEach items="${pendingOrders}" var="po">
-							<a href="/ordenes/${po.id}" class="block mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+							<a href="/ordenes/${po.id}" class="block mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600 hover:scale-[102%]">
 								<div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${po.category}s.png'/>" alt="${po.category}" />
 								</div>
@@ -47,7 +47,7 @@
 				<c:choose>
 					<c:when test="${not empty completedOrders}">
 						<c:forEach items="${completedOrders}" var="co">
-							<a href="/ordenes/${co.id}" class="block mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md  dark:bg-neutral-600">
+							<div class="mb-4 flex gap-x-2 items-center rounded-lg bg-gray-100 p-4 shadow-md  dark:bg-neutral-600">
 								<div class="size-16 rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${co.category}s.png'/>" alt="${co.category}" />
 								</div>
@@ -59,7 +59,8 @@
 									</p>
 									<p class="text-sm">${co.postOrder.title}</p>
 								</div>
-							</a>
+								<a href="/ordenes/${co.id}" class="block ml-auto w-fit rounded-full bg-gray-700 px-4 py-2 text-white text-sm hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Dejar reseña <i class="fas fa-pencil-alt"></i></a>
+							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
@@ -78,7 +79,7 @@
 									<img src="<c:url value='/images/iconos/${review.post.category}s.png'/>" alt="${review.post.category}" />
 								</div>
 								<div class="text-gray-800 dark:text-white">
-									<p class="font-semibold">${review.post.title}</p>
+									<p class="font-semibold">${review.post.title} <span class="font-normal text-sm">[${review.post.supplier.fullName}]</span></p>
 									<img src="<c:url value='/images/home/Puntuacion${review.rating}.png'/>" alt="Puntuación ${review.rating}" class="h-4 w-fit" />
 									<p class="text-xs">
 										<fmt:formatDate value="${review.createdAt}" pattern="yyyy-MM-dd" />

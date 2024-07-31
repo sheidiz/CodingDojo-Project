@@ -27,7 +27,7 @@
                 <c:choose>
                     <c:when test="${not empty pendingOrders}">
                         <c:forEach items="${pendingOrders}" var="po">
-                            <a href="/ordenes/${po.id}" class="block mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                            <a href="/ordenes/${po.id}" class="block mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600 hover:scale-[102%]">
                                 <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
 									<img src="<c:url value='/images/iconos/${po.category}s.png'/>" alt="${po.category}" class="w-12 h-fit" />
 								</div>
@@ -56,7 +56,7 @@
                 <c:choose>
                     <c:when test="${not empty completedOrders}">
                         <c:forEach items="${completedOrders}" var="co">
-                            <a href="/ordenes/${co.id}" class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600">
+                            <a href="/ordenes/${co.id}" class="mb-4 flex items-center gap-x-4 rounded-lg bg-gray-100 p-4 shadow-md dark:bg-neutral-600 hover:scale-[102%]">
                                 <div class="rounded-full bg-orange-700 p-1 drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:p-2">
                                     <img src="<c:url value='/images/iconos/${co.category}s.png'/>" alt="${co.category}" class="w-12 h-12" />
                                 </div>
@@ -93,7 +93,7 @@
 				                    <p class="text-gray-800 dark:text-white">${post.title}</p>
 				                    <p class="text-gray-800 text-xs dark:text-white">${post.description}</p>
 				                </div>
-				                <a href="/${post.id}/edit" class="ml-auto w-fit rounded-full bg-gray-700 px-10 py-2 text-white hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Editar</a>
+				                <a href="/${post.id}/edit" class="ml-auto w-fit rounded-full bg-gray-700 px-10 py-2 text-white text-sm hover:bg-gray-800 dark:bg-slate-100 dark:text-gray-800 hover:dark:bg-slate-200">Editar <i class="fas fa-pencil-alt"></i></a>
 				            </div>
 				        </c:forEach>
 				    </c:when>

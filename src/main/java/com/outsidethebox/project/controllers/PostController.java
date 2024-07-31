@@ -73,7 +73,7 @@ public class PostController {
 		}
 		post.setSupplier(user);
 		postService.save(post);
-		return "redirect:/";
+		return "redirect:/perfil";
 
 	}
 
@@ -101,7 +101,6 @@ public class PostController {
 	        }
 	    }
 
-	    // Método para guardar los cambios en la publicación
 	// Método para guardar los cambios en la publicación
 	 @PostMapping("/{id}/update")
 	 public String update(@PathVariable Long id, @Valid @ModelAttribute("post") Post post, BindingResult result, Model model,
@@ -146,8 +145,6 @@ public class PostController {
 	 }
 
 	
-
-
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable Long id) {
 		postService.deleteById(id);

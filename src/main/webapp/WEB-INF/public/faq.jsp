@@ -4,11 +4,11 @@
     <div class="container mx-auto p-4">
         <section class="mb-8 text-neutral-800 dark:text-stone-50">
             <h2 class="text-2xl font-semibold mb-4 text-center">Bienvenido a CheLaburo</h2>
-            <p class="mb-1">En CheLaburo, conectamos a usuarios como tú con LABURANTES que pueden ayudarte con una amplia gama de servicios, desde resolver problemas eléctricos hasta facilitar tu mudanza, cuidar tu jardín o pintar tu casa. Nuestros LABURANTES están aquí para resolver tus necesidades.</p>
+            <p class="mb-1">En CheLaburo, conectamos a usuarios como vos con LABURANTES que pueden ayudarte con una amplia gama de servicios, desde resolver problemas eléctricos hasta facilitar tu mudanza, cuidar tu jardín o pintar tu casa. Nuestros LABURANTES están aquí para resolver tus necesidades.</p>
             <p class="mb-4">Para registrarte, simplemente accede a nuestra página de registro, completa tus datos personales y explora una variedad de servicios disponibles para elegir el que mejor se adapte a tus necesidades.</p>    
             <h3 class="text-xl font-semibold mb-2">Pasos para Registrarte:</h3>
             <ol class="list-decimal ml-6 mb-4">
-                <li>Accede a nuestra página de registro: Visita nuestro sitio web y haz clic en el botón <a href="/registro_laburante" class="text-blue-500 underline">Únete</a> para comenzar. </li>
+                <li>Accede a nuestra página de registro: Visita nuestro sitio web y haz clic en el botón <a href="/registro" class="text-blue-500 underline">Únete</a> para comenzar. </li>
                 <li>Completa tus datos personales: Ingresa tu nombre completo, dirección de correo electrónico y crea una contraseña segura.</li>
                 <li>Explora y elige tus servicios: Una vez registrado, podrás acceder a la página principal y seleccionar cualquier servicio que desees. Nuestro sistema te guiará para encontrar el LABURANTE adecuado para tus necesidades.</li>
             </ol>

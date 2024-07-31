@@ -171,9 +171,6 @@ public class OrderController {
 		LocalDateTime estimatedDate = order.getEstimatedDate().toInstant().atZone(ZoneId.systemDefault())
 				.toLocalDateTime();
 
-		System.out.println("Fecha actual: " + fixedNow);
-		System.out.println("Fecha estimada: " + estimatedDate);
-
 		try {
 			os.completeOrder(orderId);
 			redirectAttributes.addFlashAttribute("success", "Order completed successfully.");
