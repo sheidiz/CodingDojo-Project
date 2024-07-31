@@ -1,0 +1,138 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.font-logo {
+	font-family: "League Spartan", sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	letter-spacing: -3px;
+}
+
+.font-phrase {
+	font-family: "Be Vietnam Pro", sans-serif;
+	font-style: normal;
+}
+
+.font-league-normal {
+	font-family: "League Spartan", sans-serif;
+	font-style: normal;
+}
+
+html,
+body {
+	position: relative !important;
+	height: 100% !important;
+}
+
+.swiper {
+	padding-bottom: 50px !important;
+}
+
+.swiper-slide {
+	background-position: center;
+	background-size: cover;
+	width: 300px !important;
+}
+
+.swiper-pagination-bullet {
+	background: #C2410C !important;
+}
+
+.bg-wood {
+	background: url("../images/registro/bg.jpg") center center/cover no-repeat fixed;
+}
+
+.bg-Fleteros {
+	background-image: url("../images/categorias/Fleteros.jpg");
+}
+
+.bg-Jardineros {
+	background-image: url("../images/categorias/Jardineria.jpg");
+}
+
+.bg-Electricistas {
+	background-image: url("../images/categorias/Electricistas.jpg");
+}
+
+.bg-Gasistas {
+	background-image: url("../images/categorias/Gasistas.jpg");
+}
+
+.bg-Plomeros {
+	background-image: url("../images/categorias/Plomeros.jpg");
+}
+
+.bg-Carpinteros {
+	background-image: url("../images/categorias/Carpinteros.jpg");
+}
+
+.bg-Otros {
+	background-image: url("../images/categorias/Otros.jpg");
+}
+
+.bg-Busqueda {
+	background-image: url("../images/categorias/Busqueda.jpg");
+}
+
+.bg-post {
+	background-image: url("../images/categorias/Post.jpg");
+}
+
+.bg-review {
+	background-image: url("../images/categorias/Review.jpg");
+}
+
+.bg-perfil {
+	background-image: url("../images/perfil/Perfil.jpg");
+}
+
+.accordion-content {
+	display: none;
+}
+
+.rating {
+	display: inline-block;
+}
+
+.rating input {
+	display: none;
+}
+
+.rating label {
+	float: right;
+	cursor: pointer;
+	color: #ccc;
+	transition: color 0.3s;
+}
+
+.rating label:before {
+	content: '\2605';
+	font-size: 30px;
+}
+
+.rating input:checked~label,
+.rating label:hover,
+.rating label:hover~label {
+	color: yellow;
+	transition: color 0.3s;
+}
+
+
+@media (prefers-color-scheme: dark) {
+	.bg-wood {
+		background: url("../images/registro/bg-dark.jpg") center center/cover no-repeat fixed !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.swiper-slide {
+		width: 500px !important;
+	}
+}
+
+@media (min-width: 1024px) {
+	.swiper-slide {
+		width: 700px !important;
+	}
+}
